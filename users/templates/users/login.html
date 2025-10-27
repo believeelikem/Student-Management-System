@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_styles %} <link rel="stylesheet" href="{% static 'users/login.css' %}"> {% endblock extra_styles %}
+{% block content  %}
+  <div class="form-container">
+    <h2>Student Login</h2>
+    <form id="login-form" method="POST" action="">
+      <label for="student_id">Student ID</label>
+      <input type="text" id="student_id" name="student_id" placeholder="Enter your Student ID" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="alt">Don't have an account? <a href="signup.html">Create one</a></p>
+  </div>
+
+</body>
+</html>
+{% endblock content %}

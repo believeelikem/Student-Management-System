@@ -1,0 +1,200 @@
+/* ====== RESET & GLOBAL ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f9fafb;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ====== NAVBAR ====== */
+nav {
+    background-color: #1a237e;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffca28;
+}
+
+.nav-btns a {
+    background-color: #ffca28;
+    color: #1a237e;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-btns a:hover {
+    background-color: #fdd835;
+    transform: scale(1.05);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+/* ====== HERO SECTION ====== */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)),
+                url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+.hero .cta-btn {
+    background-color: #ffca28;
+    color: #1a237e;
+    padding: 0.8rem 1.6rem;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hero .cta-btn:hover {
+    background-color: #fdd835;
+    transform: translateY(-3px);
+}
+
+/* ====== ABOUT SECTION ====== */
+section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #1a237e;
+    margin-bottom: 2rem;
+}
+
+.about p {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* ====== ACADEMICS ====== */
+.academics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+/* ====== FOOTER ====== */
+footer {
+    background-color: #1a237e;
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: #1a237e;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rising Giants School Complex</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    {% block extra_styles %} {% endblock extra_styles %}
+    <style> 
+    </style>
+</head>
+<body>
+    <!-- ====== NAVBAR ====== -->
+    <nav>
+        <div class="logo">Rising Giants School Complex</div>
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <div class="nav-links" id="nav-links">
+            <a href="{% url 'users:home' %}">Home</a>
+            <a href="#about">About</a>
+            <a href="#academics">Academics</a>
+            <a href="#contact">Contact</a>
+            <div class="nav-btns">
+                <a href="{% url 'users:login' %}">Login</a>
+                <a href="{% url 'users:register' %}">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+
+    {% endblock content %}
+        <!-- ====== FOOTER ====== -->
+    <footer>
+        <p>&copy; 2025 Rising Giants School Complex. All rights reserved.</p>
+        <p>Developed with ❤️ by Believe Elikem</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -2,4 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("THis is the home page ")
+    return render(request,"home.html")
+
+def register(request):
+    return render(request,"users/register.html")
+
+def login_view(request):
+    return render(request,"users/login.html")
