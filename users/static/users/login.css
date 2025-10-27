@@ -8,7 +8,9 @@
     margin-left: 37.5%;
     margin-top: 8%;
 }
-
+.errorlist{
+    color: red;
+}
 .form-container h2 {
     text-align: center;
     color: #1a237e;

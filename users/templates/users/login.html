@@ -4,12 +4,21 @@
 {% block content  %}
   <div class="form-container">
     <h2>Student Login</h2>
+
     <form id="login-form" method="POST" action="">
+        {% csrf_token %}
+
+      {{form.non_field_errors}}
       <label for="student_id">Student ID</label>
-      <input type="text" id="student_id" name="student_id" placeholder="Enter your Student ID" required>
+      <!-- <input type="text" id="student_id" name="student_id" placeholder="Enter your Student ID" required> -->
+
+      {{form.student_id}}
+      {{form.student_id.errors}}
 
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      <!-- <input type="password" id="password" name="password" placeholder="Enter your password" required> -->
+       {{form.password}}
+       {{form.password.errors}}
 
       <button type="submit">Login</button>
     </form>
