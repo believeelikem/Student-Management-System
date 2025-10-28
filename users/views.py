@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import CustomUserCreationForm,LoginForm
 from django.contrib.auth import login,logout,authenticate
@@ -30,13 +30,16 @@ def login_view(request):
         form = LoginForm(request.POST)
         
         if form.is_valid():
-            student_id = form.cleaned_data.get("student_id")
+            school_id = form.cleaned_data.get("school_id")
             password = form.cleaned_data.get("password")
-                    
-            
-            user = authenticate(request, student_id = student_id, password = password)
+            print(vars(form))
+            print("The username is")
+                                
+            user = authenticate(request, school_id = school_id, password = password)
             
             if user is not None:
                 login(request,user)
+                return redirect("main:dashboard")
+                
             
     return render(request,"users/login.html",{"form":form})

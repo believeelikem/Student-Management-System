@@ -9,16 +9,16 @@ User = get_user_model()
 class CustomUserCreationForm(AdminUserCreationForm):
     class Meta(AdminUserCreationForm.Meta):
         model = CustomUser
-        fields = AdminUserCreationForm.Meta.fields + ("role","student_id","email")
+        fields = AdminUserCreationForm.Meta.fields + ("role","school_id","email")
         
         widgets = {
             'username': forms.TextInput(attrs={
                 'id': 'full_name"',
                 'placeholder': 'Enter full name here please '
             }),
-            'student_id': forms.TextInput(attrs={
-                'id': 'student_id',
-                'placeholder': 'Enter full your student id here '
+            'ID': forms.TextInput(attrs={
+                'id': 'school_id',
+                'placeholder': 'Enter full your id here '
             }),
             'password1': forms.TextInput(attrs={
                 'id': 'password1',
@@ -43,9 +43,9 @@ class CustomUserCreationForm(AdminUserCreationForm):
         })
         
 class LoginForm(forms.Form):
-    student_id = forms.CharField(
+    school_id = forms.CharField(
         max_length=30,
-        widget=forms.TextInput(attrs={"id":"student_id","placeholder":"Enter your student ID"})
+        widget=forms.TextInput(attrs={"id":"student_id","placeholder":"Enter your  ID"})
         
     )
     password = forms.CharField(
@@ -58,9 +58,9 @@ class LoginForm(forms.Form):
         print("THis run ")
         clean_data = super().clean()
         
-        student_id = clean_data.get("student_id")
+        school_id = clean_data.get("school_id")
         
-        if not User.objects.filter(student_id = student_id).exists():
+        if not User.objects.filter(school_id = school_id).exists():
             print("This also run")
             raise ValidationError("No user With those Credentials Available")
         

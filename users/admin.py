@@ -11,6 +11,10 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
     
+    list_display = UserAdmin.list_display + ("school_id",)
+    
+    
+    
     fieldsets = UserAdmin.fieldsets + (
         ("Extra Info", {"fields": ("role",)}),
     )

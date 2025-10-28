@@ -15,12 +15,12 @@ class CustomUser(AbstractUser):
         "student":"Student",      
     }
      
-    student_id = models.CharField(blank=True,null=True,unique=True,validators=[is_umat_id])
+    school_id = models.CharField(blank=True,null=True,unique=True,validators=[is_umat_id])
     role = models.CharField(choices=ROLES, blank=True,default="teacher")
     
     def __str__(self):
         return self.username
     
         
-    USERNAME_FIELD = "student_id"
+    USERNAME_FIELD = "school_id"
     
