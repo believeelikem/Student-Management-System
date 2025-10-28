@@ -24,7 +24,7 @@ def sluggy(clas,obj,field="name"):
 
 class Department(models.Model):
     slug = models.SlugField(unique= True, blank=True)
-    name = models.CharField(blank=True,max_length=100)
+    name = models.CharField(blank=True,max_length=100,unique=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete= models.CASCADE,
