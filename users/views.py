@@ -39,7 +39,17 @@ def login_view(request):
             
             if user is not None:
                 login(request,user)
-                return redirect("main:dashboard")
-                
+                if user.role == "student":
+                    return redirect("main:student_dashboard")
+                elif user.role == "admin":
+                    return redirect("main:admin_dashboard")
+                elif user.role == "teacher":
+                    return redirect("main:teacher_dashboard")                
             
     return render(request,"users/login.html",{"form":form})
+
+
+def logout_view(request):
+    print("called")
+    logout(request)
+    return redirect("users:home")
