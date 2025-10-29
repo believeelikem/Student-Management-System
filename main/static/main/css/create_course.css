@@ -1,0 +1,58 @@
+
+.container {
+width: 800px;
+max-width: 700px;
+margin: 50px auto;
+background: #fff;
+padding: 2rem;
+border-radius: 10px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+text-align: center;
+color: #004aad;
+margin-bottom: 1.5rem;
+}
+
+label {
+display: block;
+font-weight: 600;
+margin-bottom: 0.5rem;
+}
+
+input, select, textarea {
+width: 100%;
+padding: 0.8rem;
+margin-bottom: 1rem;
+border: 1px solid #ccc;
+border-radius: 6px;
+font-size: 1rem;
+}
+
+textarea {
+resize: vertical;
+height: 100px;
+}
+
+button {
+width: 100%;
+background-color: #004aad;
+color: #fff;
+border: none;
+padding: 0.9rem;
+font-size: 1rem;
+border-radius: 6px;
+cursor: pointer;
+transition: 0.3s ease;
+}
+
+button:hover {
+background-color: #003580;
+}
+
+.message {
+text-align: center;
+color: green;
+display: none;
+}

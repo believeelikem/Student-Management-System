@@ -1,0 +1,42 @@
+{% extends 'main_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'main/css/create_course.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <div class="container">
+    <h2>Create New Course</h2>
+    <form id="courseForm" method="post">
+      {% csrf_token %}
+      <label for="courseName">Course Name</label>
+      {{form.name}}
+      {{form.name.errors}}
+      <label for="department">Department</label>
+
+      {{form.department}}
+      <!-- <select id="department" name="department" required>
+
+      </select> -->
+      
+      <label for="teacher">Assign Teacher</label>
+
+      {{form.teacher}}
+      <!-- <select id="teacher" name="teacher" required>
+        <option value="">Select Teacher</option>
+        <!-- Dynamically loaded teachers 
+      </select> -->
+
+      <button type="submit">Create Course</button>
+      <p class="message" id="successMsg">Course created successfully!</p>
+    </form>
+  </div>
+
+  <!-- <script>
+    document.getElementById("courseForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const msg = document.getElementById("successMsg");
+      msg.style.display = "block";
+      setTimeout(() => msg.style.display = "none", 3000);
+      this.reset();
+    });
+  </script> -->
+{% endblock body %}

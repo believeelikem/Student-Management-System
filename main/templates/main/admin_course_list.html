@@ -1,0 +1,60 @@
+{% extends 'main_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'main/css/admin_course_list.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <div class="container">
+    <!-- <div class="add-course">
+      <a href="admin-course-create.html">+ Add New Course</a>
+    </div> -->
+
+    <h1>All Courses</h1>
+    <form action="">
+      <input type="text" placeholder="search for course here ">
+      <label for="department">Filter by Department</label>
+      <select name="department" id="department">
+        <option value="">Department 1 </option>
+        <option value=""> Department 2</option>
+        <option value=""> Department 3</option>
+      </select>
+    </form>
+
+    <div class="course-grid">
+      <!-- Mock Data -->
+      <div class="course-card">
+        <h2>Mathematics</h2>
+        <p>Teacher: Mr. Kwame Adu</p>
+        <p>Department: Science</p>
+        <span class="students-count">Students Enrolled: 42</span>
+      </div>
+
+      <div class="course-card">
+        <h2>English Language</h2>
+        <p>Teacher: Mrs. Sarah Mensah</p>
+        <p>Department: Arts</p>
+        <span class="students-count">Students Enrolled: 35</span>
+      </div>
+
+      <div class="course-card">
+        <h2>Computer Science</h2>
+        <p>Teacher: Mr. Elikem Amoo</p>
+        <p>Department: ICT</p>
+        <span class="students-count">Students Enrolled: 50</span>
+      </div>
+
+      <div class="course-card">
+        <h2>Social Studies</h2>
+        <p>Teacher: Miss Akua Owusu</p>
+        <p>Department: Humanities</p>
+        <span class="students-count">Students Enrolled: 28</span>
+      </div>
+      <div class="course-card">
+        <h2>Social Studies</h2>
+        <p>Teacher: Miss Akua Owusu</p>
+        <p>Department: Humanities</p>
+        <span class="students-count">Students Enrolled: 28</span>
+      </div>
+    </div>
+  </div>
+
+{% endblock body %}

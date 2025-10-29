@@ -6,10 +6,14 @@ app_name = "main"
 
 urlpatterns = [
     path("admin",views.admin_dashboard,name="admin_dashboard"),
-    path("departments/",views.departments,name = "departments"),
-    path("create-department/",views.create_department,name = "create_department"),
-    
-    
+    path("departments/",views.departments,name = "admin_departments"),
+    path("create-department/",views.create_department,name = "admin_create_department"),
+    path("courses/",views.courses,name="admin_courses"),
+    path("students/",views.admin_student,name="admin_students"),
+    path("teachers/",views.admin_teacher,name="admin_teachers"),
+    path("create-course/",views.create_course,name = "admin_create_course"),
+
+
     path("teacher",views.teacher_dashboard,name="teacher_dashboard"),
     path("student",views.student_dashboard,name="student_dashboard"),
     path("assignments/",views.assignments,name="assignments"),

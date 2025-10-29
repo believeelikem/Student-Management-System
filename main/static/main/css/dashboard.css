@@ -107,6 +107,10 @@ a {
     object-fit: cover;
 }
 
+.errorlist{
+    color: red;
+}
+
 /* ===== DASHBOARD CONTENT ===== */
 .dashboard-content {
     padding: 2rem;

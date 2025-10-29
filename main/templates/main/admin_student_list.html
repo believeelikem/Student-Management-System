@@ -4,25 +4,26 @@
 {% endblock extra_styles %}
 {% block body %}
   <div class="container">
-    <h2>Departments</h2>
-    <a href="{% url 'main:create_department'%}" class="add-btn">+ Add Department</a>
+    <h2>Students</h2>
+    <!-- <a href="{% url 'main:admin_create_department'%}" class="add-btn">+ Add Department</a> -->
 
     <table>
       <thead>
         <tr>
           <th>ID</th>
-          <th>Department Name</th>
-          <th>Created By</th>
+          <th>Student Name</th>
+          <th>School_ID</th>
           <!-- <th>Updated At</th> -->
           <th>Actions</th> 
         </tr>
       </thead>
       <tbody id="departmentList">
-        {%for department in departments %}
+        {%for student in students %}
         <tr>
-            <td>{{department.id}}</td>
-            <td>{{department.name}}</td>
-            <td>{{department.created_by}}</td>
+            <td>{{student.id}}</td>
+            <td>{{student.username}}</td>
+            <td>{{student.school_id}}</td>
+            <td>{{student.}}</td>
             <!-- <td>department.name</td> -->
         </tr>
         {% endfor %}

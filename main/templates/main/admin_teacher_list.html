@@ -1,0 +1,39 @@
+{% extends 'main_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'main/css/departments.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <div class="container">
+    <h2>Teachers</h2>
+    <!-- <a href="{% url 'main:admin_create_department'%}" class="add-btn">+ Add Department</a> -->
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Teacher Name</th>
+          <th>School_ID</th>
+          <!-- <th>Updated At</th> -->
+          <th>Actions</th> 
+        </tr>
+      </thead>
+      <tbody id="departmentList">
+        {%for teacher in teachers %}
+        <tr>
+            <td>{{teacher.id}}</td>
+            <td>{{teacher.username}}</td>
+            <td>{{teacher.school_id}}</td>
+            <td>{{teacher.date_joined}}</td>
+            <!-- <td>department.name</td> -->
+        </tr>
+        {% endfor %}
+        <!-- Dynamic rows will come from backend -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Later you'll populate this table dynamically with Django data
+    // For now, the structure is ready to accept data via backend
+  </script>
+{% endblock body %}

@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from .decorators import allowed_role
-from .forms import DepartmentForm
+from .forms import DepartmentForm,CourseForm
 from django.contrib import messages
-from.models import Department
+from.models import Department,Course
+
+User = get_user_model()
 
 
 @login_required
@@ -19,7 +22,7 @@ def departments(request):
     context = {
         "departments":departments
     }
-    return render(request,"main/admin_department.html",context)
+    return render(request,"main/admin_department_list.html",context)
 
 def create_department(request):
     print("called to save")
@@ -33,6 +36,53 @@ def create_department(request):
             messages.info(request," Course Created Successfully")
             
     return render(request,"main/admin_create_department.html",{"form":form})
+
+
+def courses(request):
+    courses = Course.objects.all()
+    
+    context = {
+        "courses":courses
+    }
+    return render(request,"main/admin_course_list.html",context)
+
+def admin_student(request):
+    students = User.objects.filter(role = "student")
+    
+    context = {
+        "students":students
+    }
+    
+    return render(request,"main/admin_student_list.html",context)
+
+def admin_teacher(request):
+    teachers = User.objects.filter(role = "student")
+    
+    context = {
+        "teachers":teachers
+    }
+    
+    return render(request,"main/admin_teacher_list.html",context)
+
+
+def create_course(request):
+    teachers = User.objects.filter(role = "teacher")
+    form = CourseForm()
+    print(vars(form))
+    if request.method == "POST":
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.created_by = request.user
+            course.save()
+        
+    context = {
+        "form":form,
+        "teachers":teachers
+        }
+    return render(request,"main/admin_create_course.html",context)
+
+
 
 
 
@@ -55,5 +105,3 @@ def student_dashboard(request):
 
 def assignments(request):
     return render(request,"main/s_assignments.html")
-def courses(request):
-    return render(request,"main/courses.html")

@@ -54,7 +54,8 @@ class Course(models.Model):
     students = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         blank=True,
-        related_name="courses_enrolled"
+        related_name="courses_enrolled",
+        null=True
         )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,

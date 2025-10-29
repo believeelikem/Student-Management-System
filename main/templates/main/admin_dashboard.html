@@ -17,7 +17,7 @@
           <h3>Total Courses</h3>
           <p>0</p>
         </div>
-        <a href="{% url 'main:departments'%}">
+        <a href="{% url 'main:admin_departments'%}">
         <div class="card">
             <h3>Departments</h3>
           <p>0</p>
@@ -37,9 +37,11 @@
       <!-- Quick Actions -->
       <div class="section quick-actions">
         <h2>Quick Actions</h2>
-        <a href="{% url 'main:create_department'%}"> Create New Department </a>
-        <button>Assign Courses</button>
-        <button>Upload Material</button>
+        <a href="{% url 'main:admin_create_department' %}"> Create New Department </a>
+        <a href="{% url 'main:admin_create_course'%}"> Create New Course </a>
+        <a href="{% url 'main:admin_create_department'%}"> Assign Courses </a>
+        <!-- <button>Assign Courses</button>
+        <button>Upload Material</button> -->
       </div>
     </div>
   </div>
