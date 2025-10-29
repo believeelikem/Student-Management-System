@@ -16,7 +16,7 @@ class CustomUserAdmin(UserAdmin):
     
     
     fieldsets = UserAdmin.fieldsets + (
-        ("Extra Info", {"fields": ("role",)}),
+        ("Extra Info", {"fields": ("role","school_id")}),
     )
     
     add_fieldsets = (

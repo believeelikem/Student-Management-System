@@ -21,12 +21,24 @@
 
     <div class="course-grid">
       <!-- Mock Data -->
+
+      {% for course in courses %}
       <div class="course-card">
-        <h2>Mathematics</h2>
-        <p>Teacher: Mr. Kwame Adu</p>
-        <p>Department: Science</p>
+        <h2>{{course.name}}</h2>
+        {% if not course.teacher %}
+        <p >Teacher: <span id = "unassigned-course"> Unassigned </span>  </p>
+        {% else %}
+        <p>Teacher: Mr. {{course.teacher }}</p>
+        {% endif %}
+        {% if not course.department %}
+        <p > Department: <span id = "unassigned-department"> Unassigned </span>  </p>
+        {% else %}
+        <p> Department: {{course.department }}</p>
+        {% endif %}
+
         <span class="students-count">Students Enrolled: 42</span>
       </div>
+      {% endfor %}
 
       <div class="course-card">
         <h2>English Language</h2>

@@ -22,7 +22,11 @@
         <tr>
             <td>{{teacher.id}}</td>
             <td>{{teacher.username}}</td>
-            <td>{{teacher.school_id}}</td>
+            {% if teacher.school_id %}
+            <td>{{teacher.school_id}}</td>            
+            {% else %}
+            <td> something here </td>
+            {% endif%} 
             <td>{{teacher.date_joined}}</td>
             <!-- <td>department.name</td> -->
         </tr>

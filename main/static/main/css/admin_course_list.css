@@ -28,6 +28,9 @@ input,select {
     padding-right: 15px;
 } */
 
+#unassigned-course,#unassigned-department{
+    color: red;
+}
 
 form{
     text-align: center;

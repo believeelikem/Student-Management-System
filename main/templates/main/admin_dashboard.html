@@ -5,22 +5,29 @@
     <div class="dashboard-content">
       <!-- Overview Cards -->
       <div class="cards">
+        <a href="{% url 'main:admin_students'%}">
         <div class="card">
-          <h3>Total Students</h3>
-          <p>0</p>
+            <h3>Total Students</h3>
+          <p>{{total_students}}</p>
         </div>
+        </a>
+        <a href="{% url 'main:admin_teachers'%}">
         <div class="card">
-          <h3>Total Teachers</h3>
-          <p>0</p>
+            <h3>Total Teachers</h3>
+          <p>{{total_teachers}}</p>
         </div>
+        </a>
+
+        <a href="{% url 'main:admin_courses'%}">
         <div class="card">
-          <h3>Total Courses</h3>
-          <p>0</p>
+            <h3>Total Courses</h3>
+          <p>{{total_courses}}</p>
         </div>
+        </a>
         <a href="{% url 'main:admin_departments'%}">
         <div class="card">
             <h3>Departments</h3>
-          <p>0</p>
+          <p>{{total_departments}}</p>
         </div>
         </a>
 
@@ -39,7 +46,7 @@
         <h2>Quick Actions</h2>
         <a href="{% url 'main:admin_create_department' %}"> Create New Department </a>
         <a href="{% url 'main:admin_create_course'%}"> Create New Course </a>
-        <a href="{% url 'main:admin_create_department'%}"> Assign Courses </a>
+        <a href="{% url 'main:assign_course'%}"> Assign Courses </a>
         <!-- <button>Assign Courses</button>
         <button>Upload Material</button> -->
       </div>

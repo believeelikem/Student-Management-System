@@ -1,0 +1,51 @@
+{% extends 'main_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'main/css/admin_assign_course.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <div class="container">
+    <h1>Assign Course to Teacher</h1>
+
+    <div class="note">
+      Select the course and teacher from the dropdowns below.  
+      You can later update or reassign from the course details page.
+    </div>
+
+    <form method="POST" action="#">
+      <!-- Department -->
+      <div class="form-group">
+        <label for="department">Department</label>
+        <select id="department" name="department" required>
+          <option value="">-- Select Department --</option>
+          <!-- dynamic options from DB -->
+        </select>
+      </div>
+
+      <!-- Course -->
+      <div class="form-group">
+        <label for="course">Course</label>
+        <select id="course" name="course" required>
+          <option value="">-- Select Course --</option>
+          <!-- dynamic options from DB -->
+        </select>
+      </div>
+
+      <!-- Teacher -->
+      <div class="form-group">
+        <label for="teacher">Teacher</label>
+        <select id="teacher" name="teacher" required>
+          <option value="">-- Select Teacher --</option>
+          <!-- dynamic options from DB -->
+        </select>
+      </div>
+
+      <!-- Optional Remarks -->
+      <div class="form-group">
+        <label for="remarks">Remarks (optional)</label>
+        <input type="text" id="remarks" name="remarks" placeholder="E.g., For JHS 3 only">
+      </div>
+
+      <button type="submit">Assign Course</button>
+    </form>
+  </div>
+{% endblock body %}

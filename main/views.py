@@ -56,7 +56,7 @@ def admin_student(request):
     return render(request,"main/admin_student_list.html",context)
 
 def admin_teacher(request):
-    teachers = User.objects.filter(role = "student")
+    teachers = User.objects.filter(role = "teacher")
     
     context = {
         "teachers":teachers
@@ -82,6 +82,16 @@ def create_course(request):
         }
     return render(request,"main/admin_create_course.html",context)
 
+
+def assign_course(request):
+    department_id = request.POST.get("department")
+    course_id = request.POST.get("course")
+    teacher_id = request.post.get("teacher")
+    
+    # show all departments
+    # show courses not assigned to a department
+    # if no courses
+    return render(request,"main/admin_assign_course.html")
 
 
 
