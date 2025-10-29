@@ -18,12 +18,13 @@ class CustomUser(AbstractUser):
      
     school_id = models.CharField(blank=True,null=True,unique=True,validators=[is_umat_id])
     role = models.CharField(choices=ROLES, blank=True,default="teacher")
-    deparment = models.ForeignKey(
+    department = models.ForeignKey(
         Department,
             on_delete=models.SET_NULL,
             null=True,
             blank=True,
-            related_name="users"
+            related_name="users",
+            default="4"
         )
     
     

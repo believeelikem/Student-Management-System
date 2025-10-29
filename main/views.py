@@ -18,11 +18,17 @@ def admin_dashboard(request):
 
 def departments(request):
     departments = Department.objects.all()
-    
+
     context = {
         "departments":departments
     }
+
+    for department in departments:
+        print(type(department))
+        department.num_teachers = department.users.filter(role = "teacher").count() 
+        department.num_students = department.users.filter(role = "student").count() 
     return render(request,"main/admin_department_list.html",context)
+
 
 def create_department(request):
     print("called to save")
@@ -84,14 +90,64 @@ def create_course(request):
 
 
 def assign_course(request):
-    department_id = request.POST.get("department")
-    course_id = request.POST.get("course")
-    teacher_id = request.post.get("teacher")
-    
-    # show all departments
-    # show courses not assigned to a department
-    # if no courses
-    return render(request,"main/admin_assign_course.html")
+    if request.method == "POST":
+        department_id = request.POST.get("department") 
+        course_id = request.POST.get("course")
+        teacher_id = request.POST.get("teacher")
+        
+        if not department_id :
+            department_id = 0
+        if not course_id:
+            course_id = 0
+        if not teacher_id:
+            teacher_id = 0
+        
+        
+        print(f"Dept. {department_id},course {course_id}, teacher {teacher_id}")
+        
+        print("This runs")
+        department = Department.objects.filter(id = department_id).first()
+        print(department)
+        course = Course.objects.filter(id = course_id).first()
+        print(course)
+        teacher = User.objects.filter(role = "teacher", id = teacher_id).first()
+        print(teacher)
+        
+        if department:
+            
+            if course.department:
+                if course.department == department:
+                    if not course.teacher:
+                        if teacher.department == department:
+                            course.teacher = teacher
+                            course.save()
+                        else:
+                            messages.error(request,f"This teacher is not in  {department} department" )
+                    else:
+                        messages.error(request,"This course already has a teacher")
+
+                else:
+                    messages.error(request,f"This course is not under the {department} department")
+            else:
+                messages.error(request, "Course has no Department assigned to it ")
+        else:
+            if course.department == teacher.department:
+                course.teacher = teacher
+                course.save()
+            else:
+                messages.error(request,f"This teacher is not in department associated with course")
+                
+    departments = Department.objects.all()
+    courses = Course.objects.all()
+    teachers = User.objects.filter(role = "teacher")
+      
+      
+    context = {
+        "departments":departments,
+        "courses":courses,
+        "teachers":teachers
+    }
+    return render(request,"main/admin_assign_course.html",context)
 
 
 

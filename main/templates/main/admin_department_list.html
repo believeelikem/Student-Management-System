@@ -12,9 +12,10 @@
         <tr>
           <th>ID</th>
           <th>Department Name</th>
-          <th>Created By</th>
+          <!-- <th>Created By</th> -->
           <!-- <th>Updated At</th> -->
-          <th>Actions</th> 
+          <th>Num of  Teachers </th> 
+          <th>Num Students </th> 
         </tr>
       </thead>
       <tbody id="departmentList">
@@ -22,8 +23,9 @@
         <tr>
             <td>{{department.id}}</td>
             <td>{{department.name}}</td>
-            <td>{{department.created_by}}</td>
-            <!-- <td>department.name</td> -->
+            <!-- <td>{{department.created_by}}</td> -->
+            <td>{{department.num_teachers}}</td>
+            <td>{{department.num_students}}</td>
         </tr>
         {% endfor %}
         <!-- Dynamic rows will come from backend -->

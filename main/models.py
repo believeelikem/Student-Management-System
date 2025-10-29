@@ -31,7 +31,7 @@ class Department(models.Model):
         related_name="departments_created"
         )
     updated_at = models.DateTimeField(auto_now=True)
-    
+ 
     def __str__(self):
         return self.name
     
