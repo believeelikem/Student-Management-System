@@ -31,6 +31,8 @@ class Department(models.Model):
         related_name="departments_created"
         )
     updated_at = models.DateTimeField(auto_now=True)
+    
+
  
     def __str__(self):
         return self.name
@@ -62,7 +64,8 @@ class Course(models.Model):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        related_name="courses_created"
+        related_name="courses_created",
+        default="3"
         )
     department = models.ForeignKey(
         Department,
@@ -73,6 +76,11 @@ class Course(models.Model):
         )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    @property
+    def is_assigned_teach_dept(self):
+        return bool(self.teacher) and bool(self.department)
+        # return self.teacher is not None and self.department is not None
     
     def __str__(self):
         return self.name

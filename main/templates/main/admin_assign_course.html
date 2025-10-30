@@ -39,7 +39,9 @@
         <select id="course" name="course" required>
             <option value="">-- Select Course --</option>
             {% for  course in courses %}
-            <option value="{{course.id}}">{{course}}</option>            
+            {% if not course.is_assigned_teach_dept %}
+            <option value="{{course.id}}"  {% if request.POST.course == course.id|stringformat:"s" %} selected {% endif %}>{{course}}</option> 
+            {% endif %}           
             {% endfor %}
         </select>
       </div>

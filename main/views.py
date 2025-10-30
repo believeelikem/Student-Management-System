@@ -74,13 +74,50 @@ def admin_teacher(request):
 def create_course(request):
     teachers = User.objects.filter(role = "teacher")
     form = CourseForm()
-    print(vars(form))
+    # print(vars(form))
     if request.method == "POST":
+        
         form = CourseForm(request.POST)
         if form.is_valid():
-            course = form.save(commit=False)
-            course.created_by = request.user
-            course.save()
+            name = form.cleaned_data.get("name")
+            department  = form.cleaned_data.get("department")
+            teacher = form.cleaned_data.get("teacher")
+                       
+            if name and not (department or course):
+                course = Course.objects.create(name= name,created_by = request.user)
+                print("1 set ")
+
+            elif name and department and not department:
+                department = Department.objects.get(name = department)
+                course = Course.objects.create(
+                    name= name,
+                    department = department,
+                    created_by = request.user
+                )
+                print("all 2 set")
+
+            elif all([name,department,teacher]):
+                teacher = User.objects.get(username = teacher)
+                if teacher.department == department:
+                    
+                    print("teacher is ",teacher)
+                    department = Department.objects.get(name = department)
+                    
+                    course = Course.objects.create(
+                        name = name,
+                        teacher = teacher,
+                        department = department,
+                        created_by = request.user
+                    )
+                    
+                else:
+                    form.add_error(None,"Teacher is not is not in associated department")                    
+            
+            # course = form.save(commit=False)
+            # course.created_by = request.user
+            # course.save()
+        else:
+            print(form.errors)
         
     context = {
         "form":form,
@@ -131,11 +168,17 @@ def assign_course(request):
             else:
                 messages.error(request, "Course has no Department assigned to it ")
         else:
-            if course.department == teacher.department:
-                course.teacher = teacher
-                course.save()
+            if course.department:
+                messages.error(request,"Course has no department")
+                
+                if course.department == teacher.department:
+                    course.teacher = teacher
+                    course.save()
+                else:
+                    messages.error(request,f"This teacher is not in department associated with course")
+                    
             else:
-                messages.error(request,f"This teacher is not in department associated with course")
+                messages.error(request, "Course has no department")
                 
     departments = Department.objects.all()
     courses = Course.objects.all()

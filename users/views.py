@@ -24,6 +24,9 @@ def register(request):
     return render(request,"users/register.html",context)
 
 def login_view(request):
+    if request.user.is_authenticated:
+        role = request.user.role
+        return redirect(f"main:{role}_dashboard")
     form = LoginForm()
     
     if request.method == "POST":

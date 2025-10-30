@@ -6,6 +6,7 @@
   <div class="container">
     <h2>Create New Course</h2>
     <form id="courseForm" method="post">
+      {{form.non_field_errors}}
       {% csrf_token %}
       <label for="courseName">Course Name</label>
       {{form.name}}

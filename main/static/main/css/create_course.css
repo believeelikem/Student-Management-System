@@ -30,6 +30,10 @@ border-radius: 6px;
 font-size: 1rem;
 }
 
+input {
+    margin-bottom: 0px;
+}
+
 textarea {
 resize: vertical;
 height: 100px;

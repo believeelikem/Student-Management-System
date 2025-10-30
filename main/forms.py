@@ -2,6 +2,8 @@ from django import forms
 from .models import Department,Assignment,LearningMaterial,Submission,Course
 from django.contrib.auth import get_user_model
 
+from django.core.exceptions import ValidationError
+
 
 User = get_user_model()
 
@@ -32,6 +34,27 @@ class CourseForm(forms.ModelForm):
         self.fields["teacher"].queryset = User.objects.filter(role = "teacher")
         self.fields["teacher"].empty_label = "Select a teacher"
         self.fields["name"].required = True
+        
+    def clean(self):
+        cleaned_data =  super().clean()
+        
+        department = self.cleaned_data.get("department")
+        teacher = self.cleaned_data.get("teacher")
+        name = self.cleaned_data.get("name")
+        
+        if Course.objects.filter(name__iexact=name).exists():
+            raise ValidationError({"name":"Course already exists wai"})
+        
+        if teacher and not department:
+            raise ValidationError("Course not assigned a department")
+        print("is valid run")
+        
+        return cleaned_data
+        
+        
+        
+        
+        
         
         
 # class SomeForm(forms.Form):
