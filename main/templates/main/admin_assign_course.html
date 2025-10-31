@@ -23,15 +23,15 @@
     <form  action="#" method="POST">
         {% csrf_token %}
       <!-- Department -->
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="department">Department</label>
         <select id="department" name="department" >
             <option value="">-- Select Department --</option>
             {% for department in departments %}
-            <option value="{{department.id}}">{{department}}</option>            
+            <option value="{{department.id}}"{% if request.POST.department == department.id|stringformat:"s" %} selected {% endif %} >{{department}}</option>            
             {% endfor %}
         </select>
-      </div>
+      </div> -->
 
       <!-- Course -->
       <div class="form-group">
@@ -52,7 +52,7 @@
         <select id="teacher" name="teacher" required>
           <option value="">-- Select Teacher --</option>
             {% for teacher in teachers %}
-            <option value="{{teacher.id}}">{{teacher}}</option>            
+            <option value="{{teacher.id}}" {% if request.POST.teacher == teacher.id|stringformat:"s" %} selected {% endif %} >{{teacher}} </option>            
             {% endfor %}
         </select>
       </div>

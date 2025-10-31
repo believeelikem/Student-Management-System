@@ -84,42 +84,68 @@ def create_course(request):
             name = form.cleaned_data.get("name")
             department  = form.cleaned_data.get("department")
             teacher = form.cleaned_data.get("teacher")
-                       
-            if name and not (department or course):
-                course = Course.objects.create(name= name,created_by = request.user)
-                print("1 set ")
-
-            elif name and department and not department:
-                department = Department.objects.get(name = department)
-                course = Course.objects.create(
-                    name= name,
-                    department = department,
-                    created_by = request.user
-                )
-                print("all 2 set")
-
-            elif all([name,department,teacher]):
-                teacher = User.objects.get(username = teacher)
-                if teacher.department == department:
-                    
-                    print("teacher is ",teacher)
-                    department = Department.objects.get(name = department)
-                    
-                    course = Course.objects.create(
-                        name = name,
-                        teacher = teacher,
-                        department = department,
-                        created_by = request.user
-                    )
-                    
-                else:
-                    form.add_error(None,"Teacher is not is not in associated department")                    
             
-            # course = form.save(commit=False)
-            # course.created_by = request.user
-            # course.save()
+            print(f"name:{name},depaerment:{department},teacher:{teacher}")
+            
+            
+            if teacher:
+                if teacher.department.name.lower() == department.name.lower():
+                    Course.objects.create(
+                        name = name,
+                        department = department,
+                        created_by = request.user,
+                        teacher = teacher                            
+                    )
+                    messages.info(request,"Course Created successfuly")
+                else:
+                    form.add_error(None,f"Teacher is not in {department} department")
+                
+            else:
+                Course.objects.create(
+                    name = name,
+                    department = department,
+                    created_by = request.user,
+                )      
+                
         else:
-            print(form.errors)
+            print(form.errors)   
+                   
+                       
+        #     if name and not (department or course):
+        #         course = Course.objects.create(name= name,created_by = request.user)
+        #         print("1 set ")
+
+        #     elif name and department and not department:
+        #         department = Department.objects.get(name = department)
+        #         course = Course.objects.create(
+        #             name= name,
+        #             department = department,
+        #             created_by = request.user
+        #         )
+        #         print("all 2 set")
+
+        #     elif all([name,department,teacher]):
+        #         teacher = User.objects.get(username = teacher)
+        #         if teacher.department == department:
+                    
+        #             print("teacher is ",teacher)
+        #             department = Department.objects.get(name = department)
+                    
+        #             course = Course.objects.create(
+        #                 name = name,
+        #                 teacher = teacher,
+        #                 department = department,
+        #                 created_by = request.user
+        #             )
+                    
+        #         else:
+        #             form.add_error(None,"Teacher is not is not in associated department")                    
+            
+        #     # course = form.save(commit=False)
+        #     # course.created_by = request.user
+        #     # course.save()
+        # else:
+        #     print(form.errors)
         
     context = {
         "form":form,
@@ -130,57 +156,68 @@ def create_course(request):
 
 def assign_course(request):
     if request.method == "POST":
-        department_id = request.POST.get("department") 
-        course_id = request.POST.get("course")
-        teacher_id = request.POST.get("teacher")
+        # department_id = request.POST.get("department") if request.POST["department"] else 0
+        course_id = request.POST.get("course") if request.POST["course"] else 0
+        teacher_id = request.POST.get("teacher") if request.POST["teacher"] else 0
         
-        if not department_id :
-            department_id = 0
-        if not course_id:
-            course_id = 0
-        if not teacher_id:
-            teacher_id = 0
-        
-        
-        print(f"Dept. {department_id},course {course_id}, teacher {teacher_id}")
-        
-        print("This runs")
-        department = Department.objects.filter(id = department_id).first()
-        print(department)
         course = Course.objects.filter(id = course_id).first()
-        print(course)
-        teacher = User.objects.filter(role = "teacher", id = teacher_id).first()
-        print(teacher)
+        teacher = User.objects.filter(id = teacher_id,role = "teacher").first()
         
-        if department:
+        if teacher and course:
+            if course.department == teacher.department:
+                course.teacher = teacher
+                course.save() 
+            else:
+                messages.error(request,f"Teacher not in {course.department.name} department")
+        
+        
+        # if not department_id :
+        #     department_id = 0
+        # if not course_id:
+        #     course_id = 0
+        # if not teacher_id:
+        #     teacher_id = 0
+        
+        
+        # print(f"Dept. {department_id},course {course_id}, teacher {teacher_id}")
+        
+        # print("This runs")
+        # department = Department.objects.filter(id = department_id).first()
+        # print(department)
+        # course = Course.objects.filter(id = course_id).first()
+        # print(course)
+        # teacher = User.objects.filter(role = "teacher", id = teacher_id).first()
+        # print(teacher)
+        
+        # if department:
             
-            if course.department:
-                if course.department == department:
-                    if not course.teacher:
-                        if teacher.department == department:
-                            course.teacher = teacher
-                            course.save()
-                        else:
-                            messages.error(request,f"This teacher is not in  {department} department" )
-                    else:
-                        messages.error(request,"This course already has a teacher")
+        #     if course.department:
+        #         if course.department == department:
+        #             if not course.teacher:
+        #                 if teacher.department == department:
+        #                     course.teacher = teacher
+        #                     course.save()
+        #                 else:
+        #                     messages.error(request,f"This teacher is not in  {department} department" )
+        #             else:
+        #                 messages.error(request,"This course already has a teacher")
 
-                else:
-                    messages.error(request,f"This course is not under the {department} department")
-            else:
-                messages.error(request, "Course has no Department assigned to it ")
-        else:
-            if course.department:
-                messages.error(request,"Course has no department")
+        #         else:
+        #             messages.error(request,f"This course is not under the chosen department")
+        #     else:
+        #         messages.error(request, "Course has no Department assigned to it ")
+        # else:
+        #     if course.department:
+        #         messages.error(request,"Course has no department")
                 
-                if course.department == teacher.department:
-                    course.teacher = teacher
-                    course.save()
-                else:
-                    messages.error(request,f"This teacher is not in department associated with course")
+        #         if course.department == teacher.department:
+        #             course.teacher = teacher
+        #             course.save()
+        #         else:
+        #             messages.error(request,f"This teacher is not in department associated with course")
                     
-            else:
-                messages.error(request, "Course has no department")
+        #     else:
+        #         messages.error(request, "Course has no department")
                 
     departments = Department.objects.all()
     courses = Course.objects.all()
