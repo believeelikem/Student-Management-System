@@ -1,0 +1,42 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'main/css/teacher_learning_materials_list.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <div class="wrapper">
+    <div class="header">
+      <h1>Learning Materials</h1>
+      <div class="controls">
+        <select>
+          <option value="">Filter by Course</option>
+          <option value="1">Mathematics</option>
+          <option value="2">English Language</option>
+        </select>
+        <a href="{% url 'main:teacher_learning_materials_create' %}" class="add-btn">+ Add Material</a>
+      </div>
+    </div>
+
+    <div class="materials">
+      <div class="material-card">
+        <h3>Algebra Basics</h3>
+        <p>Introduction to algebraic concepts.</p>
+        <div class="meta">Course: Mathematics | Uploaded: 2025-10-26</div>
+        <div class="btns">
+          <button class="view">View</button>
+          <button class="delete">Delete</button>
+        </div>
+      </div>
+
+      <div class="material-card">
+        <h3>Essay Techniques</h3>
+        <p>How to write strong essays and arguments.</p>
+        <div class="meta">Course: English Language | Uploaded: 2025-10-25</div>
+        <div class="btns">
+          <button class="view">View</button>
+          <button class="delete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock body %}

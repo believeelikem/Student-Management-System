@@ -1,0 +1,32 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'main/css/teacher_learning_materials_create.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <div class="container">
+    <h1>Create Learning Material</h1>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <label for="course">Course</label>
+      <select name="course" id="course" required>
+        <option value="">Select Course</option>
+        <option value="1">Mathematics</option>
+        <option value="2">English Language</option>
+        <option value="3">Science</option>
+      </select>
+
+      <label for="title">Material Title</label>
+      <input type="text" id="title" name="title" placeholder="Enter material title" required />
+
+      <label for="description">Description</label>
+      <textarea name="description" id="description" placeholder="Short description..."></textarea>
+
+      <label for="file">Upload File</label>
+      <input type="file" name="file" id="file" accept=".pdf,.docx,.pptx,.mp4,.zip" required />
+
+      <button type="submit">Upload Material</button>
+    </form>
+  </div>
+{% endblock body %}

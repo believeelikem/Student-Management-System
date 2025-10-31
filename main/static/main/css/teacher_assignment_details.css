@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #f8fafc;
+    color: #1e293b;
+}
+
+.main-content {
+    padding: 30px;
+}
+
+.assignment-info {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.assignment-info h1 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #0f172a;
+}
+
+.assignment-info p {
+    color: #475569;
+    font-size: 0.95rem;
+}
+
+.submissions-table {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+th {
+    background: #f1f5f9;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+td {
+    color: #475569;
+}
+
+.btn {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: #0ea5e9;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #0284c7;
+}
+
+.btn-download {
+    background: #10b981;
+}
+
+.btn-download:hover {
+    background: #059669;
+}

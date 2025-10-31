@@ -9,6 +9,8 @@ from.models import Department,Course
 
 User = get_user_model()
 
+# ------------ADMIN FUNCTIONALITY --------------
+
 
 @login_required
 @allowed_role("admin")
@@ -192,21 +194,6 @@ def assign_course(request):
     }
     return render(request,"main/admin_assign_course.html",context)
 
-
-
-
-
-
-
-
-
-
-
-@login_required
-@allowed_role("teacher")
-def teacher_dashboard(request):
-    return render(request,"main/teacher_dashboard.html")
-
 @login_required
 @allowed_role("student")
 def student_dashboard(request):
@@ -214,3 +201,40 @@ def student_dashboard(request):
 
 def assignments(request):
     return render(request,"main/s_assignments.html")
+
+
+#-------------TEACHER FUNCTIONALITY ---------------- 
+
+
+@login_required
+@allowed_role("teacher")
+def teacher_dashboard(request):
+    return render(request,"main/teacher_dashboard.html")
+
+def teacher_course_list(request):
+    return render(request,"main/teacher_course_list.html")
+
+def teacher_course_detail(request):
+    return render(request,"main/teacher_course_detail.html")
+
+
+def teacher_assignment_list(request):
+    return render(request,"main/teacher_assignment_list.html")
+
+
+def teacher_assignment_detail(request):
+    return render(request,"main/teacher_assignment_details.html")
+
+def teacher_assignment_create(request):
+    return render(request,"main/teacher_assignment_create.html")
+
+
+def teacher_submissions(request):
+    return render(request,"main/teacher_submissions_list.html")
+
+
+def teacher_learning_materials_list(request):
+    return render(request,"main/teacher_learning_materials_list.html")
+
+def teacher_learning_materials_create(request):
+    return render(request,"main/teacher_learning_materials_create.html")

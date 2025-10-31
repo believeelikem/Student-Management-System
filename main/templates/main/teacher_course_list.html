@@ -1,0 +1,52 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'main/css/teacher_course_list.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="top-bar">
+      <h1>My Courses</h1>
+      <div class="profile">
+        <img src="https://via.placeholder.com/40" alt="Teacher">
+        <span>John Doe</span>
+      </div>
+    </div>
+
+    <section class="course-grid">
+      <!-- Dynamic data from DB -->
+       <a href="{% url 'main:teacher_course_detail' %}">
+            <div class="course-card">
+                <h3>Mathematics</h3>
+                <small>Department: Science</small>
+                <p>Enrolled Students: 45</p>
+                <button class="view-btn">View Details</button>
+            </div>
+       </a>
+
+
+      <div class="course-card">
+        <h3>English Language</h3>
+        <small>Department: Languages</small>
+        <p>Enrolled Students: 52</p>
+        <button class="view-btn">View Details</button>
+      </div>
+
+      <div class="course-card">
+        <h3>Integrated Science</h3>
+        <small>Department: Science</small>
+        <p>Enrolled Students: 40</p>
+        <button class="view-btn">View Details</button>
+      </div>
+
+      <div class="course-card">
+        <h3>Social Studies</h3>
+        <small>Department: Social Sciences</small>
+        <p>Enrolled Students: 47</p>
+        <button class="view-btn">View Details</button>
+      </div>
+    </section>
+  </main>
+{% endblock body %}

@@ -1,0 +1,73 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'main/css/teacher_assignment_list.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <main class="main-content">
+    <h1>Assignments by Course</h1>
+
+    <!-- Mathematics -->
+    <div class="course-section">
+      <h2>Mathematics</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Assignment Title</th>
+            <th>Due Date</th>
+            <th>Submissions</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Linear Equations</td>
+            <td>Oct 30, 2025</td>
+            <td>24</td>
+            <td>
+              <a href="{% url 'main:teacher_assignment_detail' %}"class="btn">View</a>
+              <a href="" class="btn btn-edit">Edit</a>
+              <button class="btn btn-delete">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Quadratic Functions</td>
+            <td>Nov 10, 2025</td>
+            <td>21</td>
+            <td>
+              <a href="" class="btn">View</a>
+              <a href="" class="btn btn-edit">Edit</a>
+              <button class="btn btn-delete">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Science -->
+    <div class="course-section">
+      <h2>Science</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Assignment Title</th>
+            <th>Due Date</th>
+            <th>Submissions</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Photosynthesis Report</td>
+            <td>Nov 2, 2025</td>
+            <td>19</td>
+            <td>
+              <a href="" class="btn">View</a>
+              <a href="" class="btn btn-edit">Edit</a>
+              <button class="btn btn-delete">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+{% endblock body%}

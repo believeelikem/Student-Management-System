@@ -1,0 +1,47 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'main/css/teacher_assignment_details.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <main class="main-content">
+    <div class="assignment-info">
+      <h1>Linear Equations - Mathematics</h1>
+      <p><strong>Due Date:</strong> October 30, 2025</p>
+      <p><strong>Total Submissions:</strong> 24</p>
+    </div>
+
+    <div class="submissions-table">
+      <h2>Student Submissions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Student ID</th>
+            <th>Submitted On</th>
+            <th>File</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mary Johnson</td>
+            <td>RGSC23045</td>
+            <td>Oct 27, 2025 - 10:45 AM</td>
+            <td><a href="/media/submissions/mary_linear.pdf" class="btn btn-download">Download</a></td>
+          </tr>
+          <tr>
+            <td>Daniel Mensah</td>
+            <td>RGSC23046</td>
+            <td>Oct 27, 2025 - 11:15 AM</td>
+            <td><a href="/media/submissions/daniel_linear.pdf" class="btn btn-download">Download</a></td>
+          </tr>
+          <tr>
+            <td>Sarah Kwame</td>
+            <td>RGSC23047</td>
+            <td>Oct 27, 2025 - 12:00 PM</td>
+            <td><a href="/media/submissions/sarah_linear.pdf" class="btn btn-download">Download</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+{% endblock body %}

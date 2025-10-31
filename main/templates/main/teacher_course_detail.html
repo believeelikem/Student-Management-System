@@ -1,0 +1,80 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'main/css/teacher_course_detail.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <main class="main-content">
+    <div class="top-bar">
+      <h1>Course Details</h1>
+      <div class="profile">
+        <img src="https://via.placeholder.com/40" alt="Teacher">
+        <span>John Doe</span>
+      </div>
+    </div>
+
+    <!-- Course Header -->
+    <div class="course-header">
+      <h2>Mathematics</h2>
+      <p>Department: Science | Total Students: 45</p>
+    </div>
+
+    <!-- Course Sections -->
+    <section class="content-sections">
+
+      <div class="section-card">
+        <h3>📘 Course Materials</h3>
+        <ul>
+          <li>
+            <span>Algebra Basics.pdf</span>
+            <button class="btn">View</button>
+          </li>
+          <li>
+            <span>Trigonometry Notes.pdf</span>
+            <button class="btn">View</button>
+          </li>
+          <li>
+            <span>Quadratic Equations Slides.pptx</span>
+            <button class="btn">View</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>🧩 Assignments</h3>
+        <ul>
+          <li>
+            <span>Assignment 1 - Linear Equations</span>
+            <button class="btn">View</button>
+          </li>
+          <li>
+            <span>Assignment 2 - Graph Functions</span>
+            <button class="btn">View</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>👩‍🎓 Enrolled Students</h3>
+        <ul>
+          <li>
+            <span>Amoah Kofi</span>
+            <button class="btn">Profile</button>
+          </li>
+          <li>
+            <span>Mensah Adjoa</span>
+            <button class="btn">Profile</button>
+          </li>
+          <li>
+            <span>Elikem Believe</span>
+            <button class="btn">Profile</button>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+  </main>
+
+</body>
+</html>
+{% endblock body %}
