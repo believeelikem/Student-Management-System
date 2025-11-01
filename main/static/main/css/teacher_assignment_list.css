@@ -10,6 +10,11 @@ body {
     color: #1e293b;
 }
 
+.btn.add{
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
 .main-content {
     padding: 30px;
 }

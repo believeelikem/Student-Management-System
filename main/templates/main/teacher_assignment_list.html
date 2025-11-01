@@ -6,9 +6,12 @@
   <main class="main-content">
     <h1>Assignments by Course</h1>
 
+    <a class="btn add" href="{% url 'main:teacher_assignment_create'%}"> + Add new Assignment </a>
+
     <!-- Mathematics -->
+     {% for course in courses %}
     <div class="course-section">
-      <h2>Mathematics</h2>
+      <h2>{{course}}</h2>
       <table>
         <thead>
           <tr>
@@ -18,18 +21,21 @@
             <th>Actions</th>
           </tr>
         </thead>
+
         <tbody>
+          {% for assignment in course.assignments.all %}
           <tr>
-            <td>Linear Equations</td>
-            <td>Oct 30, 2025</td>
-            <td>24</td>
+            <td>{{assignment.title}}</td>
+            <td>{{assignment.due_date}}</td>
+            <td> Not yet </td>
             <td>
-              <a href="{% url 'main:teacher_assignment_detail' %}"class="btn">View</a>
+              <a href="{% url 'main:teacher_assignment_detail' assignment.slug %}"class="btn">View</a>
               <a href="" class="btn btn-edit">Edit</a>
               <button class="btn btn-delete">Delete</button>
             </td>
           </tr>
-          <tr>
+          {% endfor %}
+          <!-- <tr>
             <td>Quadratic Functions</td>
             <td>Nov 10, 2025</td>
             <td>21</td>
@@ -38,13 +44,15 @@
               <a href="" class="btn btn-edit">Edit</a>
               <button class="btn btn-delete">Delete</button>
             </td>
-          </tr>
+          </tr> -->
         </tbody>
+
       </table>
     </div>
+    {% endfor %}
 
     <!-- Science -->
-    <div class="course-section">
+    <!-- <div class="course-section">
       <h2>Science</h2>
       <table>
         <thead>
@@ -68,6 +76,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
   </main>
 {% endblock body%}

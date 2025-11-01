@@ -3,9 +3,9 @@ from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from .decorators import allowed_role
-from .forms import DepartmentForm,CourseForm
+from .forms import DepartmentForm,CourseForm,AssignmentForm
 from django.contrib import messages
-from.models import Department,Course
+from.models import Department,Course,Assignment
 
 User = get_user_model()
 
@@ -249,21 +249,67 @@ def teacher_dashboard(request):
     return render(request,"main/teacher_dashboard.html")
 
 def teacher_course_list(request):
-    return render(request,"main/teacher_course_list.html")
+    courses = Course.objects.filter(teacher = request.user)
+    
+    
+    context = {
+        "courses":courses
+    }
+    return render(request,"main/teacher_course_list.html",context)
 
-def teacher_course_detail(request):
-    return render(request,"main/teacher_course_detail.html")
+def teacher_course_detail(request,slug):
+    course = Course.objects.get(slug=slug,teacher=request.user)
+    
+    return render(request,"main/teacher_course_detail.html",{"course":course})
 
 
 def teacher_assignment_list(request):
-    return render(request,"main/teacher_assignment_list.html")
+    courses = Course.objects.filter(teacher= request.user)
+    # assignments = Assignment.objects.filter()
+    
+    new_courses = []
+    for course in courses :
+        if course.assignments.all():
+            new_courses.append(course)
+    
+    context = {
+        "courses":new_courses
+    }
+    return render(request,"main/teacher_assignment_list.html",context)
 
 
-def teacher_assignment_detail(request):
-    return render(request,"main/teacher_assignment_details.html")
+def teacher_assignment_detail(request,slug):
+    assignment = Assignment.objects.get(slug = slug)
+    
+    context = {
+        "assignment":assignment
+    }
+    return render(request,"main/teacher_assignment_details.html",context)
 
 def teacher_assignment_create(request):
-    return render(request,"main/teacher_assignment_create.html")
+    form = AssignmentForm()
+    
+    form.fields["course"].queryset = Course.objects.filter(teacher = request.user)
+    
+    if request.method == "POST":
+        form = AssignmentForm(request.POST,request.FILES)
+       
+        if form.is_valid():
+            date = form.cleaned_data.get("due_date")
+            from django.utils import timezone
+            now = timezone.now()
+            if date < now:
+                form.add_error("due_date","You can't choose a date in the past")
+            else:
+                assignment = form.save(commit=False)
+                assignment.created_by = request.user
+                assignment.save()      
+        else:
+            print(f"errors is {form.errors}")
+    context = {
+        "form":form
+    }
+    return render(request,"main/teacher_assignment_create.html",context)
 
 
 def teacher_submissions(request):

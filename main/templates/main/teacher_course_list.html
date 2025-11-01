@@ -17,16 +17,20 @@
 
     <section class="course-grid">
       <!-- Dynamic data from DB -->
-       <a href="{% url 'main:teacher_course_detail' %}">
+       {% for course in courses %}
+       <a href="{% url 'main:teacher_course_detail' course.slug %}">
             <div class="course-card">
-                <h3>Mathematics</h3>
-                <small>Department: Science</small>
-                <p>Enrolled Students: 45</p>
+                <h3>{{course.name}}</h3>
+                <small>Department: {{course.department.name}}</small>
+                <p>Enrolled Students: {{course.students|length}}</p>
                 <button class="view-btn">View Details</button>
             </div>
        </a>
+       {% empty %}
+       <p> No courses Assigned yet</p>
+       {% endfor %}
 
-
+<!-- 
       <div class="course-card">
         <h3>English Language</h3>
         <small>Department: Languages</small>
@@ -46,7 +50,7 @@
         <small>Department: Social Sciences</small>
         <p>Enrolled Students: 47</p>
         <button class="view-btn">View Details</button>
-      </div>
+      </div> -->
     </section>
   </main>
 {% endblock body %}

@@ -19,15 +19,13 @@ urlpatterns = [
     # ------------  TEACHER ----------
     path("teacher",views.teacher_dashboard,name="teacher_dashboard"),
     path("teacher/courses/",views.teacher_course_list,name = "teacher_course_list"),
-    path("teacher/courses/detail",views.teacher_course_detail,name = "teacher_course_detail"),
+    path("teacher/courses/<slug:slug>",views.teacher_course_detail,name = "teacher_course_detail"),
     path("teacher/assignments/",views.teacher_assignment_list,name = "teacher_assignment_list"),
-    path("teacher/assignments/detail",views.teacher_assignment_detail,name = "teacher_assignment_detail"),
+    path("teacher/assignments/<slug:slug>",views.teacher_assignment_detail,name = "teacher_assignment_detail"),
     path("teacher/create-assignment/",views.teacher_assignment_create,name = "teacher_assignment_create"),
     path("teacher/submissions/",views.teacher_submissions,name = "teacher_submissions_list"),
     path("teacher/learning-materials/",views.teacher_learning_materials_list,name = "teacher_learning_materials_list"),
-    path("teacher/create-learning-materials/",views.teacher_learning_materials_create,name = "teacher_learning_materials_create"),
-    
-    
+    path("teacher/create-learning-materials/",views.teacher_learning_materials_create,name = "teacher_learning_materials_create"), 
     
     
     

@@ -36,8 +36,7 @@ class CourseForm(forms.ModelForm):
         self.fields["name"].required = True
         self.fields["department"].required = True
         # self.fields["department"].help_text = "Select a department"
-        
-        
+                
     def clean(self):
         cleaned_data =  super().clean()
         
@@ -59,7 +58,17 @@ class CourseForm(forms.ModelForm):
         
         
         
-# class SomeForm(forms.Form):
-#     values = forms.MultipleChoiceField()
+class AssignmentForm(forms.ModelForm):
+    class Meta:
+        model = Assignment
+        fields = ["course","title","description","material","due_date"]
+        
+        widgets = {
+            'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+        }        
         
         
+                
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        # self.fields['due_date'].input_formats = ['%Y-%m-%dT%H:%M']

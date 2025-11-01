@@ -127,8 +127,8 @@ class Assignment(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="assignments_created"
-        )
-    title = models.CharField(blank=True,max_length=100)
+    )
+    title = models.CharField(blank=True,max_length=100,unique=True)
     description = models.TextField(blank=True,null=True)
     course = models.ForeignKey(
         Course,

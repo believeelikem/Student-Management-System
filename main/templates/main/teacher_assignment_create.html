@@ -10,17 +10,19 @@
     </p>
 
     <form method="post" enctype="multipart/form-data">
+      {{for.non_field_errors}}
       {% csrf_token %}
       <div class="form-group">
-        <label for="course">Select Course</label>
+        {{form}}
+        <!-- <label for="course">Select Course</label>
         <select id="course" name="course" required>
           <option value="">-- Choose Course --</option>
           <option value="1">Mathematics</option>
           <option value="2">English Language</option>
           <option value="3">Integrated Science</option>
-        </select>
+        </select> -->
       </div>
-
+<!-- 
       <div class="form-group">
         <label for="title">Assignment Title</label>
         <input type="text" id="title" name="title" placeholder="Enter assignment title" required />
@@ -39,7 +41,7 @@
       <div class="form-group">
         <label for="file">Upload Reference File (optional)</label>
         <input type="file" id="file" name="file" accept=".pdf,.docx,.pptx,.zip,.txt" />
-      </div>
+      </div> -->
 
       <button type="submit">Create Assignment</button>
     </form>
