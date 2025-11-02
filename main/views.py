@@ -78,6 +78,8 @@ def admin_teacher(request):
     return render(request,"main/admin_teacher_list.html",context)
 
 
+@login_required
+@allowed_role("admin")
 def create_course(request):
     teachers = User.objects.filter(role = "teacher")
     form = CourseForm()
@@ -158,7 +160,8 @@ def create_course(request):
         }
     return render(request,"main/admin_create_course.html",context)
 
-
+@login_required
+@allowed_role("admin")
 def assign_course(request):
     if request.method == "POST":
         # department_id = request.POST.get("department") if request.POST["department"] else 0
