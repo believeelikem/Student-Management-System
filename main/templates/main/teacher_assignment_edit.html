@@ -1,0 +1,22 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'main/css/teacher_assignment_create.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <div class="form-container">
+    <h1>Create New Assignment</h1>
+    <p class="note">
+      Fill in the assignment details below. Make sure to select the correct course.
+    </p>
+
+    <form method="post" enctype="multipart/form-data">
+      {{for.non_field_errors}}
+      {% csrf_token %}
+      <div class="form-group">
+        {{form}}
+      </div>
+
+      <button type="submit">Create Assignment</button>
+    </form>
+  </div>
+{% endblock body %}
