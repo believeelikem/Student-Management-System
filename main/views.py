@@ -327,8 +327,8 @@ def teacher_assignment_edit(request,slug):
     # form.instance = assignment
     
     if request.method == "POST":
-        form = AssignmentForm(request.POST,request.FILES)
-        form.instance = assignment
+        form = AssignmentForm(request.POST,request.FILES,instance=assignment)
+        # form.instance = assignment
         
         if form.is_valid():
             date = form.cleaned_data.get("due_date")
