@@ -31,7 +31,8 @@
             <td>
               <a href="{% url 'main:teacher_assignment_detail' assignment.slug %}"class="btn">View</a>
               <a href="{% url 'main:teacher_assignment_edit' assignment.slug %}" class="btn btn-edit">Edit</a>
-              <button class="btn btn-delete">Delete</button>
+              <a class="btn btn-delete" href="{% url 'main:teacher_assignment_delete' assignment.slug %}">Delete</a>
+              <!-- <button ></button> -->
             </td>
           </tr>
           {% endfor %}

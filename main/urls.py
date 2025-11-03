@@ -23,6 +23,7 @@ urlpatterns = [
     path("teacher/assignments/",views.teacher_assignment_list,name = "teacher_assignment_list"),
     path("teacher/assignments/<slug:slug>",views.teacher_assignment_detail,name = "teacher_assignment_detail"),
     path("teacher/edit-assignment/<slug:slug>",views.teacher_assignment_edit,name = "teacher_assignment_edit"),
+    path("teacher/delete-assignment/<slug:slug>",views.teacher_assignment_delete,name = "teacher_assignment_delete"),
     path("teacher/create-assignment/",views.teacher_assignment_create,name = "teacher_assignment_create"),
     path("teacher/submissions/",views.teacher_submissions,name = "teacher_submissions_list"),
     path("teacher/learning-materials/",views.teacher_learning_materials_list,name = "teacher_learning_materials_list"),

@@ -348,6 +348,11 @@ def teacher_assignment_edit(request,slug):
     }
     return render(request,"main/teacher_assignment_edit.html",context)
 
+def teacher_assignment_delete(request,slug):
+    assignment = Assignment.objects.get(slug = slug)
+    assignment.delete()
+    return redirect("main:teacher_assignment_list")
+
 def teacher_submissions(request):
     return render(request,"main/teacher_submissions_list.html")
 
