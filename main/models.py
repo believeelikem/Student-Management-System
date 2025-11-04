@@ -102,7 +102,7 @@ class LearningMaterial(models.Model):
         related_name="learning_materials"
     )
 
-    title = models.CharField(blank=True,max_length=100)
+    title = models.CharField(blank=True,max_length=100,null=True)
     description = models.TextField(blank=True,null=True,max_length=200)
     material = models.FileField(
         upload_to="learning_materials/",

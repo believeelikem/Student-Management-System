@@ -17,24 +17,26 @@
     </div>
 
     <div class="materials">
+      {% for material in materials %}
       <div class="material-card">
-        <h3>Algebra Basics</h3>
-        <p>Introduction to algebraic concepts.</p>
-        <div class="meta">Course: Mathematics | Uploaded: 2025-10-26</div>
+        <h3>{{material.title}}</h3>
+        <p>{{material.description}}</p>
+        <div class="meta">Course: {{material.course}} | Uploaded: {{material.created_at}}</div>
         <div class="btns">
           <button class="view">View</button>
           <button class="delete">Delete</button>
         </div>
       </div>
+      {% endfor %}
 
-      <div class="material-card">
+      <!-- <div class="material-card">
         <h3>Essay Techniques</h3>
         <p>How to write strong essays and arguments.</p>
         <div class="meta">Course: English Language | Uploaded: 2025-10-25</div>
         <div class="btns">
           <button class="view">View</button>
           <button class="delete">Delete</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

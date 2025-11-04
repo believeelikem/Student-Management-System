@@ -1,0 +1,59 @@
+{% extends 'student_base.html' %}
+{% load static %}
+{% block extra_styles %} <link rel="stylesheet" href="{% static 'main/css/student_course_enroll.css' %}">
+{% endblock extra_styles %}
+
+{% block body %}
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>Enroll for a New Course</h1>
+
+    <div class="search-box">
+      <input type="text" placeholder="Search available courses...">
+      <button>Search</button>
+    </div>
+
+    <div class="course-container">
+      <div class="course-card">
+        <h3>Computer Networks</h3>
+        <p><strong>Instructor:</strong> Dr. Kwame Mensah</p>
+        <p><strong>Duration:</strong> 12 weeks</p>
+        <p>Understand how computers communicate over wired and wireless networks.</p>
+        <a href="#" class="enroll-btn">Enroll Now</a>
+      </div>
+
+      <div class="course-card">
+        <h3>Data Structures and Algorithms</h3>
+        <p><strong>Instructor:</strong> Mrs. Janet Ofori</p>
+        <p><strong>Duration:</strong> 10 weeks</p>
+        <p>Learn about efficient data organization, manipulation, and optimization.</p>
+        <a href="#" class="enroll-btn">Enroll Now</a>
+      </div>
+
+      <div class="course-card">
+        <h3>Web Development with Django</h3>
+        <p><strong>Instructor:</strong> Mr. Samuel Boateng</p>
+        <p><strong>Duration:</strong> 14 weeks</p>
+        <p>Build modern web apps with Django and learn full-stack development skills.</p>
+        <a href="#" class="enroll-btn">Enroll Now</a>
+      </div>
+
+      <div class="course-card">
+        <h3>Database Systems</h3>
+        <p><strong>Instructor:</strong> Dr. Ama Adjei</p>
+        <p><strong>Duration:</strong> 11 weeks</p>
+        <p>Master relational databases, SQL, and data modeling for modern systems.</p>
+        <a href="#" class="enroll-btn">Enroll Now</a>
+      </div>
+
+      <div class="course-card">
+        <h3>Operating Systems</h3>
+        <p><strong>Instructor:</strong> Mr. Kwesi Ankomah</p>
+        <p><strong>Duration:</strong> 9 weeks</p>
+        <p>Explore memory management, file systems, and process scheduling.</p>
+        <a href="#" class="enroll-btn">Enroll Now</a>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

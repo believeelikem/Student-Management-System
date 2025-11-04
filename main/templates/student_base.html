@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'main/css/student_dashboard.css' %}">
+  {% block extra_styles %} {% endblock extra_styles %}
+  <title>Student Dashboard | Rising Giants School Complex</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+   {% include "includes/student_sidebar.html" %}
+
+     <!-- Main -->
+
+    {% block body %}
+
+<!-- content will be inserted here -->
+
+    {% endblock body %}
+</body>
+</html>

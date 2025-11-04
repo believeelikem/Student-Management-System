@@ -1,0 +1,131 @@
+/* body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #f6f8fb;
+    color: #333;
+}
+
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #1a237e;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 25px 20px;
+} */
+/* 
+.sidebar .logo {
+    font-size: 22px;
+    margin-bottom: 35px;
+}
+
+.sidebar a {
+    display: block;
+    text-decoration: none;
+    color: #c5cae9;
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+.sidebar a:hover {
+    color: #fff;
+} */
+
+/* .logout-btn {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    background: #3949ab;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-align: center;
+} */
+
+.main-content {
+    margin-left: 240px;
+    padding: 25px 30px 50px;
+}
+
+.main-content h1 {
+    margin: 0;
+    font-size: 22px;
+    color: #222;
+}
+
+.main-content h1 span {
+    color: #3949ab;
+}
+
+.search-box {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.search-box input[type="text"] {
+    width: 60%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-box button {
+    background: #3949ab;
+    border: none;
+    color: white;
+    padding: 9px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #303f9f;
+}
+
+/* Course Cards */
+.course-container {
+    margin-top: 20px;
+}
+
+.course-card {
+    display: inline-block;
+    width: 400px;
+    vertical-align: top;
+    background: #fff;
+    border-radius: 10px;
+    margin: 10px 20px 15px 0;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height:192px;
+}
+
+.course-card h3 {
+    color: #1a237e;
+    margin: 0 0 8px;
+}
+
+.course-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.enroll-btn {
+    display: inline-block;
+    background: #3949ab;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 8px;
+    text-decoration: none;
+}
+
+.enroll-btn:hover {
+    background: #303f9f;
+}

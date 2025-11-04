@@ -8,8 +8,9 @@
 
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
+      {{form}}
 
-      <label for="course">Course</label>
+      <!-- <label for="course">Course</label>
       <select name="course" id="course" required>
         <option value="">Select Course</option>
         <option value="1">Mathematics</option>
@@ -24,7 +25,7 @@
       <textarea name="description" id="description" placeholder="Short description..."></textarea>
 
       <label for="file">Upload File</label>
-      <input type="file" name="file" id="file" accept=".pdf,.docx,.pptx,.mp4,.zip" required />
+      <input type="file" name="file" id="file" accept=".pdf,.docx,.pptx,.mp4,.zip" required /> -->
 
       <button type="submit">Upload Material</button>
     </form>

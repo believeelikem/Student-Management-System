@@ -72,3 +72,35 @@ class AssignmentForm(forms.ModelForm):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         # self.fields['due_date'].input_formats = ['%Y-%m-%dT%H:%M']
+        
+class LearningMaterialsForm(forms.ModelForm):
+    class Meta:
+        model = LearningMaterial
+        fields = ["course","title","description","material"]
+        
+        # widgets = {
+            
+        # }
+        
+        
+    def clean(self):
+        cleaned_data = super().clean()
+        
+        course = cleaned_data.get("course")
+        title = cleaned_data.get("title")
+        description = cleaned_data.get("description")
+        material = cleaned_data.get("material")
+        
+        if not all([course,title,description,material]):
+            raise ValidationError("All fields must be filled")        
+        
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        
+        self.fields["course"].required = True
+        self.fields["title"].required = True
+        self.fields["description"].required = True
+        self.fields["material"].required = True
+        
+        
+        

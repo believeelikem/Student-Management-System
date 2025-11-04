@@ -31,8 +31,9 @@ urlpatterns = [
     
     
     
-    
-    path("student",views.student_dashboard,name="student_dashboard"),
+    #  -------------- STUDENT -------------
+    path("student/",views.student_dashboard,name="student_dashboard"),
+    path("student/courses-enroll",views.student_course_enroll,name="student_course_enroll"),
     path("assignments/",views.assignments,name="assignments"),
     path("courses/",views.courses,name="courses"),   
 ]

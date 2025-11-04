@@ -3,9 +3,9 @@ from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from .decorators import allowed_role
-from .forms import DepartmentForm,CourseForm,AssignmentForm
+from .forms import DepartmentForm,CourseForm,AssignmentForm,LearningMaterialsForm
 from django.contrib import messages
-from.models import Department,Course,Assignment
+from.models import Department,Course,Assignment,LearningMaterial
 
 User = get_user_model()
 
@@ -239,14 +239,6 @@ def assign_course(request):
     }
     return render(request,"main/admin_assign_course.html",context)
 
-@login_required
-@allowed_role("student")
-def student_dashboard(request):
-    return render(request,"main/student_dashboard.html")
-
-def assignments(request):
-    return render(request,"main/s_assignments.html")
-
 
 #-------------TEACHER FUNCTIONALITY ---------------- 
 
@@ -274,6 +266,12 @@ def teacher_course_detail(request,slug):
 def teacher_assignment_list(request):
     courses = Course.objects.filter(teacher= request.user)
     # assignments = Assignment.objects.filter()
+    
+    
+    """
+    realising that i could  have used 
+    Assignment.objects.filter(created_by = request.user)
+    """
     
     new_courses = []
     for course in courses :
@@ -358,7 +356,47 @@ def teacher_submissions(request):
 
 
 def teacher_learning_materials_list(request):
-    return render(request,"main/teacher_learning_materials_list.html")
+    materials = LearningMaterial.objects.filter(created_by = request.user)
+    
+    context = {
+        "materials":materials
+    }
+    return render(request,"main/teacher_learning_materials_list.html",context)
 
 def teacher_learning_materials_create(request):
-    return render(request,"main/teacher_learning_materials_create.html")
+    
+    form = LearningMaterialsForm()
+    form.fields["course"].queryset = Course.objects.filter(teacher = request.user)
+    
+    if request.method == "POST":
+        form = LearningMaterialsForm(request.POST,request.FILES)
+        
+        if form.is_valid():
+            learning_material = form.save(commit=False)
+            learning_material.created_by = request.user
+            learning_material.save()
+            return redirect("main:teacher_learning_materials_list")
+        else:
+            print(form.error_class)
+        
+    context = {
+        "form":form
+    }
+        
+    return render(request,"main/teacher_learning_materials_create.html",context)
+
+
+
+#-------------STUDENT FUNCTIONALITY ---------------- 
+
+@login_required
+@allowed_role("student")
+def student_dashboard(request):
+    return render(request,"main/student_dashboard.html")
+
+
+def student_course_enroll(request):
+    return render(request,"main/student_course_enroll.html")
+
+def assignments(request):
+    return render(request,"main/s_assignments.html")
