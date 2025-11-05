@@ -8,16 +8,21 @@
     <h1>Learning Materials</h1>
 
     <!-- Course 1 -->
+  {% for course in courses %}
+    {% if course.learning_materials.all %}
     <div class="course-block">
-      <h2>Introduction to Programming (CSE101)</h2>
+      <h2>{{course.name}}(CSE101)</h2>
 
-      <div class="material-card">
-        <h3>Week 1: Basics & Variables</h3>
-        <p>Lecture slides and starter notes for week one.</p>
-        <a href="#">📘 Download</a>
-      </div>
+      {% for material in course.learning_materials.all  %}
+        <div class="material-card">
+          <h3>{{material.title}}</h3>
+          <p>{{material.description}}</p>
+          <a href="#">📘 Download</a>
+        </div>
+      {% endfor %}
+    {% endif %}
 
-      <div class="material-card">
+      <!-- <div class="material-card">
         <h3>Week 2: Loops & Conditions</h3>
         <p>Learning materials for understanding loops and control flow.</p>
         <a href="#">📘 Download</a>
@@ -28,10 +33,11 @@
         <p>Exercises to reinforce Python fundamentals.</p>
         <a href="#">📘 Download</a>
       </div>
-    </div>
+    </div> -->
+  {% endfor %}
 
     <!-- Course 2 -->
-    <div class="course-block">
+    <!-- <div class="course-block">
       <h2>Digital Systems Design (CSE204)</h2>
 
       <div class="material-card">
@@ -48,10 +54,10 @@
     </div>
 
     <!-- Example if no materials -->
-    <div class="course-block">
+    <!-- <div class="course-block">
       <h2>Database Systems (CSE305)</h2>
       <p class="no-materials">No materials uploaded yet.</p>
-    </div>
+    </div>  -->
 
   </div>
 {% endblock body %}

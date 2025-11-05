@@ -445,8 +445,17 @@ def student_course_list(request):
     }
     return render(request,"main/student_course_list.html",context)
 
-def student_course_detail(request):
-    return render(request,"main/student_course_detail.html")
+def student_course_detail(request,slug):
+    course = Course.objects.get(slug= slug)
+    assignments= Assignment.objects.filter(course = course)
+    learning_materials = LearningMaterial.objects.filter(course = course)
+    
+    context = {
+        "course":course,
+        "assignments":assignments,
+        "learning_materials":learning_materials
+    }
+    return render(request,"main/student_course_detail.html",context)
 
 
 def student_assignment_list(request):
@@ -469,11 +478,36 @@ def student_assignment_list(request):
     }    
     return render(request,"main/student_assignments_list.html",context)
 
-def student_assignment_detail(request):
-    return render(request,"main/student_assignment_detail.html")
+def student_assignment_detail(request,slug):
+    assignment = Assignment.objects.get(slug = slug)
+    
+    
+    context = {
+        "assignment":assignment
+    }
+    return render(request,"main/student_assignment_detail.html",context)
 
 def student_learning_materials(request):
-    return render(request,"main/student_learning_materials.html")
+    # We need the courses so this swouldnt be enough, atleast not easily
+    # learning_materials = LearningMaterial.objects.filter(
+    #     course__department = request.user.department,
+    #     course__students = request.user
+    # )
+    
+    courses = Course.objects.filter(
+        department = request.user.department,
+        students = request.user
+    )
+    
+    
+    learning_materials = LearningMaterial.objects.filter(
+        course__in = courses
+    )
+    context = {
+        "learning_materials":learning_materials,
+        "courses":courses
+    }
+    return render(request,"main/student_learning_materials.html",context)
 
 def student_submissions_list(request):
     return render(request,"main/student_submissions_list.html")

@@ -7,11 +7,11 @@
 {% block body %}
 
   <div class="assignment-container">
-    <h1>Assignment 1: Basic Syntax</h1>
+    <h1>Assignment 1: {{assignment.title}}</h1>
 
     <div class="meta-info">
-      <p><strong>Course:</strong> CSE101 - Intro to Programming</p>
-      <p><strong>Due Date:</strong> 15 November 2025</p>
+      <p><strong>Course:</strong> CSE101 - {{assignment.course.name}}</p>
+      <p><strong>Due Date:</strong> {{assignment.due_date}}</p>
       <p><strong>Status:</strong> Pending</p>
     </div>
 

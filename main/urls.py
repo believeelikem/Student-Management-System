@@ -39,9 +39,9 @@ urlpatterns = [
          name="student_course_enroll_unenroll_specific"
     ),
     path("student/courses",views.student_course_list,name="student_course_list"),
-    path("student/course/detail",views.student_course_detail,name="student_course_detail"),
+    path("student/course/detail/<slug:slug>",views.student_course_detail,name="student_course_detail"),
     path("student/assignments/",views.student_assignment_list,name="student_assignment_list"),
-    path("student/assignments/detail",views.student_assignment_detail,name="student_assignment_detail"),
+    path("student/assignments/<slug:slug>",views.student_assignment_detail,name="student_assignment_detail"),
     path("student/learning-materials/",views.student_learning_materials,name="student_learning_materials"),
     path("student/submissions/",views.student_submissions_list,name="student_submissions_list"),
     # path("assignments/",views.assignments,name="assignments"),

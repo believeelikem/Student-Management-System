@@ -33,7 +33,7 @@
       <p><strong>Course:</strong> {{assignment.course.name}}</p>
       <p><strong>Due Date:</strong> {{assignment.due_date}}</p>
       <p><strong>Status:</strong> Pending</p>
-      <a href="{% url 'main:student_assignment_detail'%}"> View/submit</a>
+      <a href="{% url 'main:student_assignment_detail' assignment.slug %}"> View/submit</a>
     </div>
     {% endfor %}
     <!-- <div class="assignment-card">
