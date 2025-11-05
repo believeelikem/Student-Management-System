@@ -1,10 +1,11 @@
   <aside class="sidebar">
     <h2>Student Panel</h2>
     <ul>
-      <li><a href="#" class="active">Dashboard</a></li>
-      <li><a href="#">My Courses</a></li>
-      <li><a href="#">Assignments</a></li>
-      <li><a href="#">Learning Materials</a></li>
+      <li><a href="{% url 'main:student_dashboard' %}" class="active">Dashboard</a></li>
+      <li><a href="{% url 'main:student_course_list' %}">My Courses</a></li>
+      <li><a href="{% url 'main:student_assignment_list' %} ">Assignments</a></li>
+      <li><a href="{% url 'main:student_submissions_list' %} ">Submissions</a></li>
+      <li><a href="{% url  'main:student_learning_materials' %}">Learning Materials</a></li>
       <li><a href="#">Notifications</a></li>
       <li><a href="#">Profile</a></li>
     </ul>

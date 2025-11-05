@@ -6,7 +6,7 @@
 {% block body %}
 
   <!-- Main Content -->
-  <div class="main-content">
+  <!-- <div class="main-content"> -->
     <h1>Enroll for a New Course</h1>
 
     <div class="search-box">
@@ -15,15 +15,22 @@
     </div>
 
     <div class="course-container">
-      <div class="course-card">
-        <h3>Computer Networks</h3>
-        <p><strong>Instructor:</strong> Dr. Kwame Mensah</p>
-        <p><strong>Duration:</strong> 12 weeks</p>
-        <p>Understand how computers communicate over wired and wireless networks.</p>
-        <a href="#" class="enroll-btn">Enroll Now</a>
-      </div>
 
+    {% for course in courses %}
       <div class="course-card">
+        <h3>{{course.name}}</h3>
+        <p><strong>Instructor:</strong> {{course.teacher}}</p>
+        <p><strong>Duration:</strong> 12 weeks</p>
+        <p>Description here .</p>
+        {% if user in course.students.all %}
+          <a href="{% url 'main:student_course_enroll_unenroll_specific' course.slug %}" class="unenroll-btn">Unenroll Now</a>
+        {% else %}
+          <a href="{% url 'main:student_course_enroll_unenroll_specific' course.slug %}" class="enroll-btn">Enroll Now</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+      <!-- <div class="course-card">
         <h3>Data Structures and Algorithms</h3>
         <p><strong>Instructor:</strong> Mrs. Janet Ofori</p>
         <p><strong>Duration:</strong> 10 weeks</p>
@@ -53,7 +60,7 @@
         <p><strong>Duration:</strong> 9 weeks</p>
         <p>Explore memory management, file systems, and process scheduling.</p>
         <a href="#" class="enroll-btn">Enroll Now</a>
-      </div>
+      </div> -->
     </div>
   </div>
 {% endblock body %}

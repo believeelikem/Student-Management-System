@@ -1,0 +1,56 @@
+{% extends 'student_base.html' %}
+{% load static %}
+{% block extra_styles %} <link rel="stylesheet" href="{% static 'main/css/student_course_detail.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <div class="course-detail">
+    <div class="course-header">
+      <h1>Introduction to Programming</h1>
+      <p><strong>Course Code:</strong> CSE101</p>
+      <p><strong>Instructor:</strong> John Doe</p>
+    </div>
+
+    <div class="section">
+      <h2>Course Description</h2>
+      <p>
+        This course introduces students to the core principles of programming using Python.
+        You’ll learn about variables, control structures, functions, and how to build simple algorithms.
+        By the end, you’ll be confident writing and debugging beginner-level programs.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Assignments</h2>
+      <div class="assignment-card">
+        <h3>Assignment 1: Basic Syntax</h3>
+        <p>Due: 15 Nov 2025</p>
+        <p>Status: Pending</p>
+        <button>View / Submit</button>
+      </div>
+
+      <div class="assignment-card">
+        <h3>Assignment 2: Conditional Logic</h3>
+        <p>Due: 22 Nov 2025</p>
+        <p>Status: Not Submitted</p>
+        <button>View / Submit</button>
+      </div>
+
+      <div class="assignment-card">
+        <h3>Assignment 3: Loops Practice</h3>
+        <p>Due: 30 Nov 2025</p>
+        <p>Status: Upcoming</p>
+        <button>View / Submit</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Learning Materials</h2>
+      <ul class="materials-list">
+        <li><a href="#">Week 1: Intro & Setup (PDF)</a></li>
+        <li><a href="#">Week 2: Variables and Data Types (Slides)</a></li>
+        <li><a href="#">Week 3: Loops and Conditionals (PDF)</a></li>
+        <li><a href="#">Sample Codes and Exercises (ZIP)</a></li>
+      </ul>
+    </div>
+  </div>
+{% endblock body %}

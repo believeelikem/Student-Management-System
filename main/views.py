@@ -396,7 +396,39 @@ def student_dashboard(request):
 
 
 def student_course_enroll(request):
-    return render(request,"main/student_course_enroll.html")
+    dept_courses = Course.objects.filter(department = request.user.department)
+    
+    
+    context = {
+        "courses":dept_courses
+    }
+    return render(request,"main/student_course_enroll.html",context)
 
-def assignments(request):
-    return render(request,"main/s_assignments.html")
+def student_course_enroll_unenroll_specific(request,slug):
+    course = Course.objects.get(slug = slug)
+    if request.user in course.students.all():
+        course.students.remove(request.user)
+    else:
+        course.students.add(request.user)
+    return redirect("main:student_course_enroll")
+    
+
+def student_course_list(request):
+    return render(request,"main/student_course_list.html")
+
+def student_course_detail(request):
+    return render(request,"main/student_course_detail.html")
+
+
+def student_assignment_list(request):
+    return render(request,"main/student_assignments_list.html")
+
+def student_assignment_detail(request):
+    return render(request,"main/student_assignment_detail.html")
+
+def student_learning_materials(request):
+    return render(request,"main/student_learning_materials.html")
+
+def student_submissions_list(request):
+    return render(request,"main/student_submissions_list.html")
+

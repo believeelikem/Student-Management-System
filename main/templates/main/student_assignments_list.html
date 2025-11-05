@@ -1,0 +1,63 @@
+{% extends 'student_base.html' %}
+{% load static %}
+{% block extra_styles %} <link rel="stylesheet" href="{% static 'main/css/student_assignments_list.css' %}">
+{% endblock extra_styles %}
+
+
+{% block body %}
+  <div class="assignments-container">
+    <h1>All Assignments</h1>
+
+    <div class="filters">
+      <label for="course-filter">Course:</label>
+      <select id="course-filter">
+        <option value="all">All</option>
+        <option value="cse101">CSE101 - Intro to Programming</option>
+        <option value="cse102">CSE102 - Data Structures</option>
+        <option value="cse201">CSE201 - Computer Networks</option>
+      </select>
+
+      <label for="status-filter">Status:</label>
+      <select id="status-filter">
+        <option value="all">All</option>
+        <option value="submitted">Submitted</option>
+        <option value="pending">Pending</option>
+        <option value="overdue">Overdue</option>
+      </select>
+    </div>
+
+    <div class="assignment-card">
+      <h3>Assignment 1: Basic Syntax</h3>
+      <p><strong>Course:</strong> CSE101</p>
+      <p><strong>Due Date:</strong> 15 Nov 2025</p>
+      <p><strong>Status:</strong> Pending</p>
+      <a href="{% url 'main:student_assignment_detail'%}"> View/submit</a>
+    </div>
+
+    <div class="assignment-card">
+      <h3>Assignment 2: Loops Practice</h3>
+      <p><strong>Course:</strong> CSE101</p>
+      <p><strong>Due Date:</strong> 22 Nov 2025</p>
+      <p><strong>Status:</strong> Submitted</p>
+      <button>View Submission</button>
+    </div>
+
+    <div class="assignment-card">
+      <h3>Assignment 1: Arrays & Lists</h3>
+      <p><strong>Course:</strong> CSE102</p>
+      <p><strong>Due Date:</strong> 20 Nov 2025</p>
+      <p><strong>Status:</strong> Overdue</p>
+      <button>View / Submit</button>
+    </div>
+
+    <div class="assignment-card">
+      <h3>Assignment 1: Network Layers</h3>
+      <p><strong>Course:</strong> CSE201</p>
+      <p><strong>Due Date:</strong> 18 Nov 2025</p>
+      <p><strong>Status:</strong> Pending</p>
+      <button>View / Submit</button>
+    </div>
+
+    <p class="no-results" style="display: none;">No assignments found for the selected filters.</p>
+  </div>
+{% endblock body %}

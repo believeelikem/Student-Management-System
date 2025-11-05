@@ -1,0 +1,47 @@
+{% extends 'student_base.html' %}
+{% load static %}
+{% block extra_styles %} <link rel="stylesheet" href="{% static 'main/css/student_assignment_detail.css' %}">
+{% endblock extra_styles %}
+
+
+{% block body %}
+
+  <div class="assignment-container">
+    <h1>Assignment 1: Basic Syntax</h1>
+
+    <div class="meta-info">
+      <p><strong>Course:</strong> CSE101 - Intro to Programming</p>
+      <p><strong>Due Date:</strong> 15 November 2025</p>
+      <p><strong>Status:</strong> Pending</p>
+    </div>
+
+    <div class="assignment-desc">
+      <h3>Description</h3>
+      <p>
+        This assignment covers basic Python syntax including variables, input/output, and simple arithmetic operations.
+        Write a program that accepts user input, performs a few calculations, and prints results with explanations.
+      </p>
+    </div>
+
+    <div class="resources">
+      <h3>Attached Resources</h3>
+      <a href="#">📘 Download Instructions PDF</a>
+    </div>
+
+    <div class="submission-section">
+      <h3>Submit Your Work</h3>
+      <p>Upload your completed assignment document before the deadline.</p>
+
+      <form action="#" method="POST" enctype="multipart/form-data">
+        <input type="file" name="submission_file" accept=".pdf,.docx,.zip" required><br>
+        <button type="submit">Upload Submission</button>
+      </form>
+    </div>
+
+    <div class="submission-info">
+      <p><strong>Last Submitted:</strong> —</p>
+      <p><strong>Submission Status:</strong> Not yet submitted</p>
+    </div>
+  </div>
+
+{% endblock body %}

@@ -1,0 +1,56 @@
+{% extends 'student_base.html' %}
+{% load static %}
+{% block extra_styles %} <link rel="stylesheet" href="{% static 'main/css/student_submissions_list.css' %}">
+{% endblock extra_styles %}
+
+{% block body %}
+  <h1>My Submissions</h1>
+  <p class="description">View all the assignments you’ve submitted and download your uploaded documents.</p>
+
+  <div class="filter-bar">
+    <form method="get">
+      <label for="course">Course:</label>
+      <select id="course" name="course">
+        <option value="">All</option>
+        <option value="1">Computer Networks</option>
+        <option value="2">Embedded Systems</option>
+      </select>
+
+      <label for="assignment">Assignment:</label>
+      <select id="assignment" name="assignment">
+        <option value="">All</option>
+        <option value="1">Lab Report 1</option>
+        <option value="2">Final Project</option>
+      </select>
+
+      <button type="submit">Filter</button>
+    </form>
+  </div>
+
+  <div class="submission-list">
+    <div class="submission-card">
+      <h3>Assignment: Lab Report 1</h3>
+      <p><strong>Course:</strong> Embedded Systems</p>
+      <p><strong>Submitted On:</strong> 2025-11-03 10:42 AM</p>
+      <a href="#">Download Submission</a>
+    </div>
+
+    <div class="submission-card">
+      <h3>Assignment: Network Design Task</h3>
+      <p><strong>Course:</strong> Computer Networks</p>
+      <p><strong>Submitted On:</strong> 2025-11-01 08:23 PM</p>
+      <a href="#">Download Submission</a>
+    </div>
+
+    <div class="submission-card">
+      <h3>Assignment: Final Project Report</h3>
+      <p><strong>Course:</strong> Software Engineering</p>
+      <p><strong>Submitted On:</strong> 2025-10-29 04:11 PM</p>
+      <a href="#">Download Submission</a>
+    </div>
+  </div>
+
+  <div class="no-results" style="display: none;">
+    <p>No submissions found for the selected filters.</p>
+  </div>
+{% endblock body %}

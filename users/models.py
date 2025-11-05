@@ -27,7 +27,6 @@ class CustomUser(AbstractUser):
             default="4"
         )
     
-    
     def __str__(self):
         return self.username
     

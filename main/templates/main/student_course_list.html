@@ -1,0 +1,43 @@
+{% extends 'student_base.html' %}
+{% load static %}
+{% block extra_styles %} <link rel="stylesheet" href="{% static 'main/css/student_course_list.css' %}">
+{% endblock extra_styles %}
+
+{% block body %}
+
+  <h1 class="page-title">My Enrolled Courses</h1>
+
+  <div class="course-container">
+    <!-- Example Enrolled Course -->
+    <div class="course-card">
+      <h3>Computer Networks</h3>
+      <p><strong>Instructor:</strong> Dr. Kwame Mensah</p>
+      <p><strong>Duration:</strong> 12 weeks</p>
+      <p><strong>Status:</strong> Ongoing</p>
+      <p>Learn about communication protocols, topology, and network devices.</p>
+      <a href="{% url 'main:student_course_detail' %}" class="view-btn">View Course</a>
+    </div>
+
+    <div class="course-card">
+      <h3>Database Systems</h3>
+      <p><strong>Instructor:</strong> Dr. Ama Adjei</p>
+      <p><strong>Duration:</strong> 11 weeks</p>
+      <p><strong>Status:</strong> Ongoing</p>
+      <p>Understand relational models, SQL queries, and data normalization.</p>
+      <a href="#" class="view-btn">View Course</a>
+    </div>
+
+    <div class="course-card">
+      <h3>Web Development with Django</h3>
+      <p><strong>Instructor:</strong> Mr. Samuel Boateng</p>
+      <p><strong>Duration:</strong> 14 weeks</p>
+      <p><strong>Status:</strong> Ongoing</p>
+      <p>Develop scalable and secure web applications using Django framework.</p>
+      <a href="#" class="view-btn">View Course</a>
+    </div>
+  </div>
+
+  <!-- If no enrolled courses exist -->
+  <!-- <p class="no-course">You have not enrolled in any courses yet.</p> -->
+
+{% endblock body %}

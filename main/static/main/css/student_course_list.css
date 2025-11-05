@@ -1,0 +1,60 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f6f8fb;
+    margin: 0;
+    color: #333;
+}
+
+.page-title {
+    margin: 20px 30px;
+    font-size: 1.8rem;
+    color: #1a237e;
+}
+
+.course-container {
+    padding: 10px 30px 40px;
+}
+
+.course-card {
+    display: inline-block;
+    vertical-align: top;
+    background: #fff;
+    border-radius: 10px;
+    width: 310px;
+    padding: 20px;
+    margin: 12px 18px 12px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.course-card h3 {
+    color: #1a237e;
+    margin-bottom: 6px;
+}
+
+.course-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 4px 0;
+}
+
+.view-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: #3949ab;
+    color: #fff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.view-btn:hover {
+    background: #303f9f;
+}
+
+.no-course {
+    text-align: center;
+    color: #666;
+    font-size: 15px;
+    margin-top: 50px;
+}

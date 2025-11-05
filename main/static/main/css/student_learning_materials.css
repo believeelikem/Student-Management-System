@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f5f7;
+    margin: 0;
+    padding: 25px;
+}
+
+.materials-container {
+    /* max-width: 950px; */
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #111827;
+}
+
+.course-block {
+    margin-bottom: 35px;
+}
+
+.course-block h2 {
+    font-size: 20px;
+    color: #1e40af;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 6px;
+    margin-bottom: 15px;
+}
+
+.material-card {
+    display: inline-block;
+    width: 280px;
+    vertical-align: top;
+    margin: 10px;
+    padding: 15px;
+    background-color: #f9fafb;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.material-card h3 {
+    font-size: 16px;
+    color: #111;
+    margin-bottom: 8px;
+}
+
+.material-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.material-card a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #0ea5e9;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.material-card a:hover {
+    background-color: #0284c7;
+}
+
+.no-materials {
+    color: #6b7280;
+    font-style: italic;
+}

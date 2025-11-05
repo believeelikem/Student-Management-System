@@ -1,0 +1,57 @@
+{% extends 'student_base.html' %}
+{% load static %}
+{% block extra_styles %} <link rel="stylesheet" href="{% static 'main/css/student_learning_materials.css' %}">
+{% endblock extra_styles %}
+
+{% block body %}
+  <div class="materials-container">
+    <h1>Learning Materials</h1>
+
+    <!-- Course 1 -->
+    <div class="course-block">
+      <h2>Introduction to Programming (CSE101)</h2>
+
+      <div class="material-card">
+        <h3>Week 1: Basics & Variables</h3>
+        <p>Lecture slides and starter notes for week one.</p>
+        <a href="#">📘 Download</a>
+      </div>
+
+      <div class="material-card">
+        <h3>Week 2: Loops & Conditions</h3>
+        <p>Learning materials for understanding loops and control flow.</p>
+        <a href="#">📘 Download</a>
+      </div>
+
+      <div class="material-card">
+        <h3>Practice Sheet</h3>
+        <p>Exercises to reinforce Python fundamentals.</p>
+        <a href="#">📘 Download</a>
+      </div>
+    </div>
+
+    <!-- Course 2 -->
+    <div class="course-block">
+      <h2>Digital Systems Design (CSE204)</h2>
+
+      <div class="material-card">
+        <h3>Module 1: Logic Gates</h3>
+        <p>Introductory notes and truth tables.</p>
+        <a href="#">📘 Download</a>
+      </div>
+
+      <div class="material-card">
+        <h3>Module 2: Boolean Algebra</h3>
+        <p>Comprehensive notes on simplification methods.</p>
+        <a href="#">📘 Download</a>
+      </div>
+    </div>
+
+    <!-- Example if no materials -->
+    <div class="course-block">
+      <h2>Database Systems (CSE305)</h2>
+      <p class="no-materials">No materials uploaded yet.</p>
+    </div>
+
+  </div>
+{% endblock body %}
