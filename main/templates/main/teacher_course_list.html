@@ -22,7 +22,7 @@
             <div class="course-card">
                 <h3>{{course.name}}</h3>
                 <small>Department: {{course.department.name}}</small>
-                <p>Enrolled Students: {{course.students|length}}</p>
+                <p>Enrolled Students: {{course.students.all|length}}</p>
                 <button class="view-btn">View Details</button>
             </div>
        </a>

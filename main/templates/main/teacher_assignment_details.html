@@ -22,24 +22,18 @@
           </tr>
         </thead>
         <tbody>
+          {% for submission in submissions %}
           <tr>
-            <td>Mary Johnson</td>
-            <td>RGSC23045</td>
-            <td>Oct 27, 2025 - 10:45 AM</td>
-            <td><a href="/media/submissions/mary_linear.pdf" class="btn btn-download">Download</a></td>
+            <td>{{submission.student.usernam}}</td>
+            <td>{{submission.student.school_id}}</td>
+            <td>{{submission.submitted_on}}</td>
+            <td><a href="{{submission.submitted_document}}" class="btn btn-download">Download</a></td>
           </tr>
-          <tr>
-            <td>Daniel Mensah</td>
-            <td>RGSC23046</td>
-            <td>Oct 27, 2025 - 11:15 AM</td>
-            <td><a href="/media/submissions/daniel_linear.pdf" class="btn btn-download">Download</a></td>
-          </tr>
-          <tr>
-            <td>Sarah Kwame</td>
-            <td>RGSC23047</td>
-            <td>Oct 27, 2025 - 12:00 PM</td>
-            <td><a href="/media/submissions/sarah_linear.pdf" class="btn btn-download">Download</a></td>
-          </tr>
+          {% empty %}
+          <li>
+            <span>No submissions yet </span>
+          </li>          
+          {% endfor %}
         </tbody>
       </table>
     </div>

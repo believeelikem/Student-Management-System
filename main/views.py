@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .decorators import allowed_role
 from .forms import DepartmentForm,CourseForm,AssignmentForm,LearningMaterialsForm
 from django.contrib import messages
-from.models import Department,Course,Assignment,LearningMaterial
+from.models import Department,Course,Assignment,LearningMaterial,Submission
 
 User = get_user_model()
 
@@ -260,7 +260,18 @@ def teacher_course_list(request):
 def teacher_course_detail(request,slug):
     course = Course.objects.get(slug=slug,teacher=request.user)
     
-    return render(request,"main/teacher_course_detail.html",{"course":course})
+    assignments = Assignment.objects.filter(course = course )
+    learning_materials = LearningMaterial.objects.filter(course = course)
+    
+    enrolled_students = course.students.all()
+    
+    context = {
+        "course":course,
+        "assignments":assignments,
+        "learning_materials":learning_materials,
+        "students":enrolled_students
+    }
+    return render(request,"main/teacher_course_detail.html",context)
 
 
 def teacher_assignment_list(request):
@@ -287,8 +298,13 @@ def teacher_assignment_list(request):
 def teacher_assignment_detail(request,slug):
     assignment = Assignment.objects.get(slug = slug)
     
+    course = Course.objects.get(name = assignment.course.name)
+    submissions = Submission.objects.filter(assignment = assignment)
+    
     context = {
-        "assignment":assignment
+        "assignment":assignment,
+        "course":course,
+        "submissions":submissions
     }
     return render(request,"main/teacher_assignment_details.html",context)
 
@@ -352,6 +368,7 @@ def teacher_assignment_delete(request,slug):
     return redirect("main:teacher_assignment_list")
 
 def teacher_submissions(request):
+    
     return render(request,"main/teacher_submissions_list.html")
 
 
@@ -398,7 +415,6 @@ def student_dashboard(request):
 def student_course_enroll(request):
     dept_courses = Course.objects.filter(department = request.user.department)
     
-    
     context = {
         "courses":dept_courses
     }
@@ -414,7 +430,16 @@ def student_course_enroll_unenroll_specific(request,slug):
     
 
 def student_course_list(request):
-    return render(request,"main/student_course_list.html")
+    dept_courses = Course.objects.filter(department = request.user.department)
+    enrolled_courses = []
+    for course in dept_courses:
+        if request.user in course.students.all():
+            enrolled_courses.append(course)
+    
+    context = {
+        "courses":enrolled_courses
+    }
+    return render(request,"main/student_course_list.html",context)
 
 def student_course_detail(request):
     return render(request,"main/student_course_detail.html")
