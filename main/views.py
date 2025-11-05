@@ -368,8 +368,8 @@ def teacher_assignment_delete(request,slug):
     return redirect("main:teacher_assignment_list")
 
 def teacher_submissions(request):
-    
-    return render(request,"main/teacher_submissions_list.html")
+    all_submissions = Submission.objects.all()
+    return render(request,"main/teacher_submissions_list.html",{"submissions":all_submissions})
 
 
 def teacher_learning_materials_list(request):

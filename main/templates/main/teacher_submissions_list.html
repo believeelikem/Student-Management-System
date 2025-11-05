@@ -36,22 +36,28 @@
         </tr>
       </thead>
       <tbody>
+        {% for submission in submissions %}
         <tr>
-          <td>John Mensah</td>
-          <td>Mathematics</td>
-          <td>Algebra Basics</td>
-          <td>2025-10-24</td>
+          <td>{{submission.student}}</td>
+          <td>{{submission.assignment.course.name}}</td>
+          <td>{{submission.assignment.title}}</td>
+          <td>{{subission.submitted_on}}</td>
           <td><a href="#" class="action-btn">View File</a></td>
           <td><button class="action-btn">Grade</button></td>
         </tr>
-        <tr>
+          {% empty %}
+          <li>
+            <span>No materials yet </span>
+          </li>          
+        {% endfor %}
+        <!-- <tr>
           <td>Akua Nyarko</td>
           <td>English Language</td>
           <td>Essay Writing</td>
           <td>2025-10-26</td>
           <td><a href="#" class="action-btn">View File</a></td>
           <td><button class="action-btn">Grade</button></td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>

@@ -7,8 +7,8 @@
 } */
 
 .wrapper {
-    width: 90%;
-    max-width: 1000px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
     background: #fff;
     border-radius: 12px;
@@ -55,7 +55,7 @@
 
 .material-card {
     display: inline-block;
-    width: 46%;
+    width: 43%;
     vertical-align: top;
     margin: 10px 2%;
     background: #fff;
