@@ -26,15 +26,17 @@
       </select>
     </div>
 
+    {% for assignment in assignments %}
+
     <div class="assignment-card">
-      <h3>Assignment 1: Basic Syntax</h3>
-      <p><strong>Course:</strong> CSE101</p>
-      <p><strong>Due Date:</strong> 15 Nov 2025</p>
+      <h3>{{assignment.title}}</h3>
+      <p><strong>Course:</strong> {{assignment.course.name}}</p>
+      <p><strong>Due Date:</strong> {{assignment.due_date}}</p>
       <p><strong>Status:</strong> Pending</p>
       <a href="{% url 'main:student_assignment_detail'%}"> View/submit</a>
     </div>
-
-    <div class="assignment-card">
+    {% endfor %}
+    <!-- <div class="assignment-card">
       <h3>Assignment 2: Loops Practice</h3>
       <p><strong>Course:</strong> CSE101</p>
       <p><strong>Due Date:</strong> 22 Nov 2025</p>
@@ -56,7 +58,7 @@
       <p><strong>Due Date:</strong> 18 Nov 2025</p>
       <p><strong>Status:</strong> Pending</p>
       <button>View / Submit</button>
-    </div>
+    </div> -->
 
     <p class="no-results" style="display: none;">No assignments found for the selected filters.</p>
   </div>

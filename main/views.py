@@ -430,12 +430,16 @@ def student_course_enroll_unenroll_specific(request,slug):
     
 
 def student_course_list(request):
-    dept_courses = Course.objects.filter(department = request.user.department)
-    enrolled_courses = []
-    for course in dept_courses:
-        if request.user in course.students.all():
-            enrolled_courses.append(course)
-    
+    # dept_courses = Course.objects.filter(department = request.user.department)
+    # enrolled_courses = [course for course in dept_courses if request.user in course.students.all()]
+    # OR
+    # enrolled_courses = [course for course in Course.objects.filter(department = request.user.department) if request.user in course.students.all()]
+    # OR
+    enrolled_courses = Course.objects.filter(
+        department = request.user.department,
+        students = request.user
+    )
+ 
     context = {
         "courses":enrolled_courses
     }
@@ -446,7 +450,24 @@ def student_course_detail(request):
 
 
 def student_assignment_list(request):
-    return render(request,"main/student_assignments_list.html")
+    # enrolled_courses = [course for course in Course.objects.filter(department = request.user.department) if request.user in course.students.all()]
+    # assignments = [assignment for assignment in Assignment.objects.all() if assignment.course in enrolled_courses]
+    # OR
+    # enrolled_courses = Course.objects.filter(
+    #     department = request.user.department,
+    #     students = request.user
+    # )
+    # assignments = Assignment.objects.filter(course__in = enrolled_courses)
+    # OR assignments that belong to the user, very optimized query
+    assignments = Assignment.objects.filter(
+        course__department = request.user.department,
+        course__students = request.user,
+    )
+    context = {
+        # "courses":enrolled_courses,
+        "assignments":assignments,
+    }    
+    return render(request,"main/student_assignments_list.html",context)
 
 def student_assignment_detail(request):
     return render(request,"main/student_assignment_detail.html")

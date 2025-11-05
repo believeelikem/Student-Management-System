@@ -27,7 +27,8 @@
           {% for material in learning_materials %}
           <li>
             <span>{{material.title}}</span>
-            <button class="btn">View</button>
+            <a class="btn">View</a>
+            <!-- <button class="btn">View</button> -->
           </li>
           {% empty %}
           <li>
@@ -43,7 +44,7 @@
           {% for assignment in assignments %}
           <li>
             <span>{{assignment.title}}</span>
-            <button class="btn">View</button>
+            <a  href="{% url 'main:teacher_assignment_detail' assignment.slug  %}" class="btn">View</a>
           </li>
           {% empty %}
           <li>
