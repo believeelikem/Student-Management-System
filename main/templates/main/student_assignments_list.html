@@ -33,7 +33,13 @@
       <p><strong>Course:</strong> {{assignment.course.name}}</p>
       <p><strong>Due Date:</strong> {{assignment.due_date}}</p>
       <p><strong>Status:</strong> Pending</p>
+      {% if assignment.due_date < now %}
+      <p class="due-date"> Time is due </p>
+      {% elif assignment in submitted_assignments  %}
+      <a href="{% url 'main:student_assignment_detail' assignment.slug %}"> View/Update</a>
+      {% else %}
       <a href="{% url 'main:student_assignment_detail' assignment.slug %}"> View/submit</a>
+      {% endif %}
     </div>
     {% endfor %}
     <!-- <div class="assignment-card">

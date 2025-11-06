@@ -471,16 +471,23 @@ def student_assignment_list(request):
     assignments = Assignment.objects.filter(
         course__department = request.user.department,
         course__students = request.user,
-    )
+    ).order_by("-due_date")
+    
+    submitted_ass = Assignment.objects.filter(submissions__student = request.user)
+    from django.utils import timezone
+    
     context = {
         # "courses":enrolled_courses,
         "assignments":assignments,
+        "submitted_assignments":submitted_ass,
+        "now":timezone.now()
     }    
     return render(request,"main/student_assignments_list.html",context)
 
 def student_assignment_detail(request,slug):
     assignment = Assignment.objects.get(slug = slug)
     submission = assignment.submissions.filter(student = request.user).first()
+
        
     if request.method == "POST":
         submission_file = request.FILES.get("submission_file")
@@ -501,7 +508,7 @@ def student_assignment_detail(request,slug):
                     assignment = assignment,
                     submitted_document = submission_file
                 )
-                return redirect("main:student_assignment_detail",assignment)
+                return redirect("main:student_assignment_detail",assignment.slug)
             else:
                 messages.info(request,"Invalid file extension")
     

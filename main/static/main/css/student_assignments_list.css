@@ -60,7 +60,7 @@ h1 {
 
 .assignment-card p {
     margin: 4px 0;
-    color: #555;
+    /* color: #555; */
     font-size: 14px;
 }
 
@@ -79,6 +79,15 @@ h1 {
     cursor: pointer;
     position: absolute;
     bottom: 5px;
+}
+
+.due-date{
+    width: 80px;
+    background-color: rgb(236, 35, 35);
+    font-weight: 700;
+    color: white;
+    border-radius: 5px;
+    padding: 4px;    
 }
 
 .assignment-card a:hover {
