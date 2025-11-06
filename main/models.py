@@ -160,6 +160,8 @@ class Submission(models.Model):
     )  
     submitted_document =  models.FileField(upload_to="submissions/",validators=[exts_validator])
     submitted_on = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
     
     def __str__(self):
         return f"Submission for {self.assignment.title}"

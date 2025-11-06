@@ -9,4 +9,6 @@ def allowed_role(role):
             return func(request,*args,**kwargs)
         return innner
     return decorator
-                
+    
+def is_validate_extension(filename):
+    return filename.endswith(".pdf")

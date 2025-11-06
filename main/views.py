@@ -480,15 +480,43 @@ def student_assignment_list(request):
 
 def student_assignment_detail(request,slug):
     assignment = Assignment.objects.get(slug = slug)
-    
+    submission = assignment.submissions.filter(student = request.user).first()
+       
+    if request.method == "POST":
+        submission_file = request.FILES.get("submission_file")
+        if submission:
+            if submission_file:
+                from .decorators import is_validate_extension
+                if is_validate_extension(submission_file.name):
+                    submission.submitted_document = submission_file
+                    submission.save()
+                else:
+                    messages.info(request,"Invalid file extension")            
+        else:          
+            print(type(submission_file))
+            from .decorators import is_validate_extension
+            if is_validate_extension(submission_file.name):
+                document = Submission.objects.create(
+                    student = request.user,
+                    assignment = assignment,
+                    submitted_document = submission_file
+                )
+                return redirect("main:student_assignment_detail",assignment)
+            else:
+                messages.info(request,"Invalid file extension")
     
     context = {
         "assignment":assignment
     }
+    
+    if submission:
+        context.update({
+            "submission":submission
+        })
     return render(request,"main/student_assignment_detail.html",context)
 
 def student_learning_materials(request):
-    # We need the courses so this swouldnt be enough, atleast not easily
+    # We need the courses so this wouldnt be enough, atleast not easily
     # learning_materials = LearningMaterial.objects.filter(
     #     course__department = request.user.department,
     #     course__students = request.user

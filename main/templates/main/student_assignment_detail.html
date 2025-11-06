@@ -6,7 +6,15 @@
 
 {% block body %}
 
+
   <div class="assignment-container">
+    {% if messages %}
+      <ul class="errorlist">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
     <h1>Assignment 1: {{assignment.title}}</h1>
 
     <div class="meta-info">
@@ -33,15 +41,32 @@
       <p>Upload your completed assignment document before the deadline.</p>
 
       <form action="#" method="POST" enctype="multipart/form-data">
-        <input type="file" name="submission_file" accept=".pdf,.docx,.zip" required><br>
+        {% csrf_token %}
+        {% if submission %}
+          <p>Current submission: 
+            <a href="{{ submission.submitted_document.url }}" target="_blank">
+              {{ submission.submitted_document.name }}
+            </a>
+          </p> 
+        {% endif %}      
+        <input type="file" name="submission_file" accept=".pdf,.zip" {% if not submission %} required {% endif %}><br>
         <button type="submit">Upload Submission</button>
       </form>
     </div>
 
-    <div class="submission-info">
-      <p><strong>Last Submitted:</strong> —</p>
-      <p><strong>Submission Status:</strong> Not yet submitted</p>
-    </div>
+    
+      {% if submission %}
+      <div class="submission-info">
+      <p><strong>Last Submitted:{{submission.updated_at}}</strong> </p>
+      <p><strong>Submission Status:</strong>Submitted</p>
+      </div>
+      {% else %}
+      <div class="submission-info-no">
+      <p><strong>Last Submitted: - </strong> —</p>
+      <p><strong>Submission Status:</strong> Not yet submitted</p>   
+
+      {% endif %}
+      </div>
   </div>
 
 {% endblock body %}
