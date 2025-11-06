@@ -43,6 +43,7 @@ urlpatterns = [
     path("student/assignments/",views.student_assignment_list,name="student_assignment_list"),
     path("student/assignments/<slug:slug>",views.student_assignment_detail,name="student_assignment_detail"),
     path("student/learning-materials/",views.student_learning_materials,name="student_learning_materials"),
+    path("student/learning-materials/download/<slug:slug>",views.student_learning_material_download,name="student_learning_material_download"),
     path("student/submissions/",views.student_submissions_list,name="student_submissions_list"),
     # path("assignments/",views.assignments,name="assignments"),
     path("courses/",views.courses,name="courses"),   

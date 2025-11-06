@@ -70,7 +70,7 @@
     margin: 4px 0;
 }
 
-.assignment-card button {
+.assignment-card a {
     margin-top: 10px;
     background-color: #007bff;
     color: white;
@@ -78,6 +78,7 @@
     border-radius: 4px;
     padding: 8px 12px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .assignment-card button:hover {

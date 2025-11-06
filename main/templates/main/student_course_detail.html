@@ -26,9 +26,24 @@
       {% for assignment in assignments %}
       <div class="assignment-card">
         <h3>{{assignment.title}}</h3>
+        <p><strong>Due Date:</strong> {{assignment.due_date}}</p>
+        {% if assignment in submitted_assignments %}
+        <p><strong>Status: Submitted </strong> </p>
+        {% else %}
+        <p><strong>Status: Pending </strong> </p>
+        {% endif %}
+        {% if assignment.due_date < now %}
+        <p class="due-date"> Time is due </p>
+        {% elif assignment in submitted_assignments  %}
+        <a href="{% url 'main:student_assignment_detail' assignment.slug %}"> View/Update</a>
+        {% else %}
+        <a href="{% url 'main:student_assignment_detail' assignment.slug %}"> View/submit</a>
+        {% endif %}
+        <!-- <h3>{{assignment.title}}</h3>
         <p>Due: {{assignment.due_date}}</p>
         <p>Status: Pending</p>
-        <button>View / Submit</button>
+        <button>View / Submit</button> -->
+        
       </div>
         {% empty %}
           <li>
@@ -40,10 +55,11 @@
     <div class="section">
       <h2>Learning Materials</h2>
       <ul class="materials-list">
-        <li><a href="#">Week 1: Intro & Setup (PDF)</a></li>
-        <li><a href="#">Week 2: Variables and Data Types (Slides)</a></li>
-        <li><a href="#">Week 3: Loops and Conditionals (PDF)</a></li>
-        <li><a href="#">Sample Codes and Exercises (ZIP)</a></li>
+        {% for material in  learning_materials %}
+        <li><a href="{% url 'main:student_learning_material_download' material.slug %}">{{material.title}}</a></li>
+        {% empty %}
+        <li> No materials for this course yet </li>
+        {% endfor %}
       </ul>
     </div>
   </div>

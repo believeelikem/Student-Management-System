@@ -449,11 +449,15 @@ def student_course_detail(request,slug):
     course = Course.objects.get(slug= slug)
     assignments= Assignment.objects.filter(course = course)
     learning_materials = LearningMaterial.objects.filter(course = course)
+    submitted_ass = Assignment.objects.filter(submissions__student = request.user)
+
+    
     
     context = {
         "course":course,
         "assignments":assignments,
-        "learning_materials":learning_materials
+        "learning_materials":learning_materials,
+        "submitted_assignments":submitted_ass
     }
     return render(request,"main/student_course_detail.html",context)
 
@@ -487,7 +491,6 @@ def student_assignment_list(request):
 def student_assignment_detail(request,slug):
     assignment = Assignment.objects.get(slug = slug)
     submission = assignment.submissions.filter(student = request.user).first()
-
        
     if request.method == "POST":
         submission_file = request.FILES.get("submission_file")
@@ -544,6 +547,25 @@ def student_learning_materials(request):
     }
     return render(request,"main/student_learning_materials.html",context)
 
+from django.http import FileResponse
+from django.conf import settings
+import os
+def student_learning_material_download(request,slug):
+    learning_material = LearningMaterial.objects.get(slug = slug)
+    print("materials is:",learning_material)
+    file_path = os.path.join(settings.MEDIA_ROOT,learning_material.material.name)
+    file_obj = open(file_path,"rb")
+    return FileResponse(file_obj,as_attachment=True)
+    
+    
+    
+    
+
 def student_submissions_list(request):
-    return render(request,"main/student_submissions_list.html")
+    submissions = Submission.objects.filter(student = request.user)
+    
+    context = {
+        "submissions":submissions
+    }
+    return render(request,"main/student_submissions_list.html",context)
 

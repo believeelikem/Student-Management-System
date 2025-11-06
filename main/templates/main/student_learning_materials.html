@@ -17,7 +17,7 @@
         <div class="material-card">
           <h3>{{material.title}}</h3>
           <p>{{material.description}}</p>
-          <a href="#">📘 Download</a>
+          <a href="{% url 'main:student_learning_material_download' material.slug %}">📘 Download</a>
         </div>
       {% endfor %}
     {% endif %}

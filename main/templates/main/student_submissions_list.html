@@ -28,28 +28,15 @@
   </div>
 
   <div class="submission-list">
+    {% for submission in submissions %}
     <div class="submission-card">
-      <h3>Assignment: Lab Report 1</h3>
-      <p><strong>Course:</strong> Embedded Systems</p>
-      <p><strong>Submitted On:</strong> 2025-11-03 10:42 AM</p>
+      <h3>Assignment: {{submission.assignment}}</h3>
+      <p><strong>Course:</strong> {{submission.assignment.course.name}}</p>
+      <p><strong>Submitted On:</strong> {{submission.submitted_on}}</p>
       <a href="#">Download Submission</a>
     </div>
-
-    <div class="submission-card">
-      <h3>Assignment: Network Design Task</h3>
-      <p><strong>Course:</strong> Computer Networks</p>
-      <p><strong>Submitted On:</strong> 2025-11-01 08:23 PM</p>
-      <a href="#">Download Submission</a>
-    </div>
-
-    <div class="submission-card">
-      <h3>Assignment: Final Project Report</h3>
-      <p><strong>Course:</strong> Software Engineering</p>
-      <p><strong>Submitted On:</strong> 2025-10-29 04:11 PM</p>
-      <a href="#">Download Submission</a>
-    </div>
+    {% endfor %}
   </div>
-
   <div class="no-results" style="display: none;">
     <p>No submissions found for the selected filters.</p>
   </div>

@@ -32,7 +32,11 @@
       <h3>{{assignment.title}}</h3>
       <p><strong>Course:</strong> {{assignment.course.name}}</p>
       <p><strong>Due Date:</strong> {{assignment.due_date}}</p>
-      <p><strong>Status:</strong> Pending</p>
+      {% if assignment in submitted_assignments %}
+      <p><strong>Status: Submitted </strong> </p>
+      {% else %}
+      <p><strong>Status: Pending </strong> </p>
+      {% endif %}
       {% if assignment.due_date < now %}
       <p class="due-date"> Time is due </p>
       {% elif assignment in submitted_assignments  %}
