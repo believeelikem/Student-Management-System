@@ -13,36 +13,37 @@
 
     <section class="dashboard-content">
       <div class="card">
-        <h3>My Courses</h3>
-        <p>You're currently enrolled in 4 courses this semester.</p>
+        <h2>My Courses</h2>
+        <h5> No. enrolled courses: <span>{{total_courses|length }}</span> </h5>
         <ul>
           <!-- <li>Web Programming</li>
           <li>Signals & Systems</li>
           <li>Embedded Systems</li>
           <li>Software Engineering</li> -->
         </ul>
-        <a href="#" class="action-btn">View All Courses</a>
+        <a href="{% url 'main:student_course_list' %}" class="action-btn">View All Courses</a>
       </div>
 
       <div class="card">
         <h3>Active Assignments</h3>
-        <p>2 assignments are due this week. </p>
-        <ul>
-          <li>Web Programming – <strong>Due Nov 10</strong></li>
+        <h5> Active assignments : <span>{{active_assignments|length }}</span> </h5>
+        <!-- <ul>
+          <li>Web Programming – <strong>Due Nov 10</strong></li> -->
           <!-- <li>Signals & Systems – <strong>Due Nov 8</strong></li> -->
-        </ul>
-        <a href="#" class="action-btn">View Assignments</a>
+        <!-- </ul> -->
+        <a href="{% url 'main:student_assignment_list' %}" class="action-btn">View Assignments</a>
       </div>
 
       <div class="card">
         <h3>Learning Materials</h3>
-        <p>Teachers have uploaded new slides and notes for ongoing lessons.</p>
-        <ul>
+        <h5> Current Learning materials : <span>{{learning_materials|length }}</span> </h5>
+
+        <!-- <ul>
           <li>Lecture Notes: Signal Decomposition</li>
           <li>Slides: Software Design Principles</li>
           <!-- <li>Lab Manual: Arduino Setup Guide</li> -->
-        </ul>
-        <a href="#" class="action-btn">Access Materials</a>
+        <!-- </ul> --> 
+        <a href="{% url 'main:student_learning_materials' %}" class="action-btn">Access Materials</a>
       </div>
     </section>
 
@@ -63,20 +64,20 @@
           </tr>
         </thead>
         <tbody>
+        {% for assignment in active_assignments %}
           <tr>
-            <td>Web Programming</td>
-            <td>Build a Django App</td>
-            <td>Nov 10, 2025</td>
-            <td>Pending</td>
-            <!-- <td><a href="#" class="action-btn">View</a></td> -->
-          </tr>
-          <tr>
-            <td>Signals & Systems</td>
-            <td>Signal Decomposition</td>
-            <td>Nov 8, 2025</td>
+            <td> {{assignment.course}} </td>
+            <td> {{assignment.title}}</td>
+            <td>{{assignment.due_date}}</td>]
+            {% if assignment in submitted_assignments %}
             <td>Submitted</td>
-            <!-- <td><a href="#" class="action-btn">View</a></td> -->
+            {% else %}
+            <td>Pending</td>
+            {% endif %}
+            <td><a href="{% url 'main:student_assignment_detail' assignment.slug %}" class="action-btn-table">Submit</a></td>
           </tr>
+        {% endfor %}
+
         </tbody>
       </table>
     </section>

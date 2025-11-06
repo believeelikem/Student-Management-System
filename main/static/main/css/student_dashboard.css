@@ -128,12 +128,15 @@ body {
     transform: translateY(-4px);
 }
 
-.card h3 {
+.card h2 {
     color: #0f172a;
     margin-bottom: 10px;
     font-size: 1.1rem;
 }
 
+span{
+    font-size: 50px;
+}
 .card p {
     color: #475569;
     font-size: 0.9rem;
@@ -157,6 +160,18 @@ body {
     font-size: 0.85rem;
     transition: background 0.3s;
     position: absolute;
+    bottom: 15px;
+}
+
+.action-btn-table {
+    display: inline-block;
+    background: #0ea5e9;
+    color: #fff;
+    padding: 7px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.3s;
     bottom: 15px;
 }
 

@@ -405,12 +405,30 @@ def teacher_learning_materials_create(request):
 
 
 #-------------STUDENT FUNCTIONALITY ---------------- 
+from django.utils import timezone
 
 @login_required
 @allowed_role("student")
 def student_dashboard(request):
-    return render(request,"main/student_dashboard.html")
+    now = timezone.now()
+    enrolled_courses = Course.objects.filter(students = request.user)
+    active_assignments = Assignment.objects.filter(due_date__gte = now)
+    learning_materials = LearningMaterial.objects.filter(
+        # course__department = request.user.department,
+        course__students = request.user
+    )
+    submitted_ass = Assignment.objects.filter(submissions__student = request.user)
 
+    
+    
+    context = {
+        "total_courses":enrolled_courses,
+        "active_assignments":active_assignments,
+        "learning_materials":learning_materials,
+        "now":now,
+        "submitted_assignments":submitted_ass
+    }
+    return render(request,"main/student_dashboard.html",context)
 
 def student_course_enroll(request):
     dept_courses = Course.objects.filter(department = request.user.department)
