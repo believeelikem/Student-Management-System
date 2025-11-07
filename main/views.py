@@ -6,6 +6,9 @@ from .decorators import allowed_role
 from .forms import DepartmentForm,CourseForm,AssignmentForm,LearningMaterialsForm
 from django.contrib import messages
 from.models import Department,Course,Assignment,LearningMaterial,Submission
+from django.http import FileResponse
+from django.conf import settings
+import os
 
 User = get_user_model()
 
@@ -246,7 +249,39 @@ def assign_course(request):
 @login_required
 @allowed_role("teacher")
 def teacher_dashboard(request):
-    return render(request,"main/teacher_dashboard.html")
+    now = timezone.now()
+    courses = Course.objects.filter(teacher = request.user)
+    active_assignments = Assignment.objects.filter(
+        course__teacher = request.user,
+        due_date__gte = now
+    )
+    
+    assignments_given = Assignment.objects.filter(
+        course__teacher = request.user
+    )
+    
+    courses_with_assignments = courses.filter(
+        assignments__isnull = False
+    )
+
+    submissions_for_assignments = Submission.objects.filter(
+        assignment__in = assignments_given
+    )
+        
+    
+    # courses_with_assignments = courses.filter(assignments__isnull = False)
+    # assignments_given = Assignment.objects.filter(course__in = courses)
+    # submissions_for_assignments = Submission.objects.filter(assignment__in=assignments_given)
+    
+    
+    context ={
+        "courses":courses,
+        "active_assignments":active_assignments,
+        "courses_with_assignments":courses_with_assignments.count(),
+        "assignment_given_total":assignments_given.count(),
+        "total_submissions":submissions_for_assignments.count()
+    }
+    return render(request,"main/teacher_dashboard.html",context)
 
 def teacher_course_list(request):
     courses = Course.objects.filter(teacher = request.user)
@@ -261,36 +296,37 @@ def teacher_course_detail(request,slug):
     course = Course.objects.get(slug=slug,teacher=request.user)
     
     assignments = Assignment.objects.filter(course = course )
+    print(course.assignments.all()==assignments)
     learning_materials = LearningMaterial.objects.filter(course = course)
     
-    enrolled_students = course.students.all()
+    all_enrolled_students = course.students.all()
     
     context = {
         "course":course,
         "assignments":assignments,
         "learning_materials":learning_materials,
-        "students":enrolled_students
+        "students":all_enrolled_students
     }
     return render(request,"main/teacher_course_detail.html",context)
 
 
 def teacher_assignment_list(request):
-    courses = Course.objects.filter(teacher= request.user)
-    # assignments = Assignment.objects.filter()
+    # courses = Course.objects.filter(teacher= request.user)
+        # new_courses = []
+    # for course in courses :
+    #     if course.assignments.all():
+    #         new_courses.append(course)
     
+    # Optimized query below 
+    courses = Course.objects.filter(
+        teacher = request.user
+    ).exclude(
+        assignments__isnull = True 
+    )
     
-    """
-    realising that i could  have used 
-    Assignment.objects.filter(created_by = request.user)
-    """
-    
-    new_courses = []
-    for course in courses :
-        if course.assignments.all():
-            new_courses.append(course)
     
     context = {
-        "courses":new_courses
+        "courses":courses
     }
     return render(request,"main/teacher_assignment_list.html",context)
 
@@ -308,6 +344,12 @@ def teacher_assignment_detail(request,slug):
     }
     return render(request,"main/teacher_assignment_details.html",context)
 
+def teacher_assignment_submission_download(request,id):
+    submission = Submission.objects.get(id=id)
+    
+    file_path = os.path.join(settings.MEDIA_ROOT,submission.submitted_document.name)
+    file_obj = open(file_path,"rb")
+    return FileResponse(file_obj,as_attachment=True)
 
 def teacher_assignment_create(request):
     form = AssignmentForm()
@@ -565,9 +607,7 @@ def student_learning_materials(request):
     }
     return render(request,"main/student_learning_materials.html",context)
 
-from django.http import FileResponse
-from django.conf import settings
-import os
+
 def student_learning_material_download(request,slug):
     learning_material = LearningMaterial.objects.get(slug = slug)
     print("materials is:",learning_material)

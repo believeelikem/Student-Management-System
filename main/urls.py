@@ -22,6 +22,7 @@ urlpatterns = [
     path("teacher/courses/<slug:slug>",views.teacher_course_detail,name = "teacher_course_detail"),
     path("teacher/assignments/",views.teacher_assignment_list,name = "teacher_assignment_list"),
     path("teacher/assignments/<slug:slug>",views.teacher_assignment_detail,name = "teacher_assignment_detail"),
+    path("teacher/assignment-submission/download/<int:id>",views.teacher_assignment_submission_download,name = "teacher_assignment_submission_download"),
     path("teacher/edit-assignment/<slug:slug>",views.teacher_assignment_edit,name = "teacher_assignment_edit"),
     path("teacher/delete-assignment/<slug:slug>",views.teacher_assignment_delete,name = "teacher_assignment_delete"),
     path("teacher/create-assignment/",views.teacher_assignment_create,name = "teacher_assignment_create"),

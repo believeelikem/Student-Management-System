@@ -23,10 +23,10 @@
         <tbody>
           {% for submission in submissions %}
           <tr>
-            <td>{{submission.student.usernam}}</td>
+            <td>{{submission.student.username}}</td>
             <td>{{submission.student.school_id}}</td>
             <td>{{submission.submitted_on}}</td>
-            <td><a href="{{submission.submitted_document}}" class="btn btn-download">Download</a></td>
+            <td><a href="{% url 'main:teacher_assignment_submission_download' submission.id %}" class="btn btn-download">Download</a></td>
           </tr>
           {% empty %}
           <li>
