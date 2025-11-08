@@ -648,22 +648,34 @@ def student_learning_material_download(request,slug):
     
 
 def student_submissions_list(request):
+    course_id = request.GET.get("course") 
+    assignment_id = request.GET.get("assignment")
+    
     courses_with_assignments_where_enrolled = Course.objects.filter(
+        # id = course_id,
         students =request.user,
         assignments__isnull = False
     ).distinct()
-    
     
     assignments = Assignment.objects.filter(
         course__in = courses_with_assignments_where_enrolled
     )
     
-    
     submissions = Submission.objects.filter(
         student = request.user,
         assignment__in = assignments
     )
-    
+
+    if course_id:
+        submissions = submissions.filter(
+            assignment__course__id = course_id
+        )
+        
+    if assignment_id:
+        submissions = submissions.filter(
+            assignment__id = assignment_id
+        )
+
     # submissions1 = Submission.objects.filter(student = request.user)
     # ---- submissions1 equal with above most of the time buh False
     # ---- when hypothetically there's a submission for course not enrolled in
