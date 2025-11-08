@@ -12,8 +12,9 @@
       <label for="course">Course:</label>
       <select id="course" name="course">
         <option value="">All</option>
-        <option value="1">Computer Networks</option>
-        <option value="2">Embedded Systems</option>
+        {% for course in courses %}
+        <option value="{{course.id}}">{{course.name}}</option>
+        {% endfor %}
       </select>
 
       <label for="assignment">Assignment:</label>
@@ -22,7 +23,6 @@
         <option value="1">Lab Report 1</option>
         <option value="2">Final Project</option>
       </select>
-
       <button type="submit">Filter</button>
     </form>
   </div>

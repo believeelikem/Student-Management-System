@@ -648,10 +648,36 @@ def student_learning_material_download(request,slug):
     
 
 def student_submissions_list(request):
-    submissions = Submission.objects.filter(student = request.user)
+    courses_with_assignments_where_enrolled = Course.objects.filter(
+        students =request.user,
+        assignments__isnull = False
+    ).distinct()
     
+    
+    assignments = Assignment.objects.filter(
+        course__in = courses_with_assignments_where_enrolled
+    )
+    
+    
+    submissions = Submission.objects.filter(
+        student = request.user,
+        assignment__in = assignments
+    )
+    
+    # submissions1 = Submission.objects.filter(student = request.user)
+    # ---- submissions1 equal with above most of the time buh False
+    # ---- when hypothetically there's a submission for course not enrolled in
+    # print(submissions.order_by("assignment"))
+    # print()
+    # print(submissions1.order_by("assignment"))
+    
+    # print(list(submissions1.order_by("assignment")) == list((submissions.order_by("assignment"))))
+    
+    # print(courses_with_assignments_where_enrolled)
     context = {
-        "submissions":submissions
+        "submissions":submissions,
+        "courses":courses_with_assignments_where_enrolled,
+        "assignments":assignments
     }
     return render(request,"main/student_submissions_list.html",context)
 
