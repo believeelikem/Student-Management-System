@@ -11,6 +11,12 @@ body {
     background-color: #f4f6f8;
 }
 
+strong{
+    font-size: 28px;
+    font-weight: 700;
+    color: black;
+}
+
 /* Sidebar */
 .sidebar {
     width: 250px;

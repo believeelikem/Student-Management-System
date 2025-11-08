@@ -253,6 +253,7 @@ def assign_course(request):
 def teacher_dashboard(request):
     now = timezone.now()
     courses = Course.objects.filter(teacher = request.user)
+    print(courses)
     active_assignments = Assignment.objects.filter(
         course__teacher = request.user,
         due_date__gte = now
@@ -264,23 +265,26 @@ def teacher_dashboard(request):
     
     courses_with_assignments = courses.filter(
         assignments__isnull = False
-    )
+    ).distinct()
+    
+    print(courses_with_assignments)
 
     submissions_for_assignments = Submission.objects.filter(
         assignment__in = assignments_given
     )
-        
     
+    print("submissions is ",submissions_for_assignments)
+        
     # courses_with_assignments = courses.filter(assignments__isnull = False)
     # assignments_given = Assignment.objects.filter(course__in = courses)
     # submissions_for_assignments = Submission.objects.filter(assignment__in=assignments_given)
     
     
     context ={
-        "courses":courses,
-        "active_assignments":active_assignments,
-        "courses_with_assignments":courses_with_assignments.count(),
-        "assignment_given_total":assignments_given.count(),
+        "total_courses":courses.count(),
+        "total_active_assignments":active_assignments.count(),
+        "total_courses_with_assignments":courses_with_assignments.count(),
+        "total_assignments_given":assignments_given.count(),
         "total_submissions":submissions_for_assignments.count()
     }
     return render(request,"main/teacher_dashboard.html",context)
@@ -411,14 +415,36 @@ def teacher_assignment_delete(request,slug):
     assignment.delete()
     return redirect("main:teacher_assignment_list")
 
+
 def teacher_submissions(request):
-    all_submissions = Submission.objects.all()
+    all_submissions = Submission.objects.filter(assignment__course__teacher = request.user)
+    print(f"explanation{all_submissions.explain()}")
     return render(request,"main/teacher_submissions_list.html",{"submissions":all_submissions})
+
+def teacher_submissions_download_all(request):
+    import zipfile
+    from io import BytesIO
+    file_paths = []
+    submissions = Submission.objects.filter(assignment__course__teacher = request.user)
+    
+    for submission in submissions:
+        file_paths.append(os.path.join(settings.MEDIA_ROOT,submission.submitted_document.name))
+        
+    zip_buffer = BytesIO()
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        for file_path in file_paths:
+            if os.path.exists(file_path):
+                # Add file to ZIP with just the filename (no full path)
+                arcname = os.path.basename(file_path)
+                zip_file.write(file_path, arcname)
+    zip_buffer.seek(0)
+    response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
+    response['Content-Disposition'] = 'attachment; filename="files.zip"'
+    return response
 
 
 def teacher_learning_materials_list(request):
     materials = LearningMaterial.objects.filter(created_by = request.user)
-    
     context = {
         "materials":materials
     }
@@ -514,7 +540,6 @@ def student_course_detail(request,slug):
     submitted_ass = Assignment.objects.filter(submissions__student = request.user)
 
     
-    
     context = {
         "course":course,
         "assignments":assignments,
@@ -534,12 +559,13 @@ def student_assignment_list(request):
     # )
     # assignments = Assignment.objects.filter(course__in = enrolled_courses)
     # OR assignments that belong to the user, very optimized query
+    
     assignments = Assignment.objects.filter(
         course__department = request.user.department,
         course__students = request.user,
     ).order_by("-due_date")
     
-    submitted_ass = Assignment.objects.filter(submissions__student = request.user)
+    submitted_ass = Assignment.objects.filter(submissions__student = request.user).distinct()
     from django.utils import timezone
     
     context = {

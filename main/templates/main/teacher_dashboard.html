@@ -12,15 +12,16 @@
     <section class="dashboard-content">
       <div class="card">
         <h3>Total Courses</h3>
-        <p>Number of courses you are handling.</p>
+        <!-- <p>Number of courses you are handling.</p> -->
+        <h1 style="text-align: center;">{{total_courses}}</h1>
       </div>
       <div class="card">
         <h3>Active Assignments</h3>
-        <p>Monitor and manage ongoing assignments.</p>
+        <h1 style="text-align: center;">{{total_active_assignments}}</h1>
       </div>
       <div class="card">
         <h3>Submissions</h3>
-        <p>8 courses, 100 submissions .</p>
+        <p> <strong>{{total_courses_with_assignments}}</strong> courses, <strong>{{total_assignments_given}}</strong> assignments, <strong> {{total_submissions}}</strong> submissions.</p>
       </div>
       <div class="card">
         <h3>Recent Uploads</h3>
