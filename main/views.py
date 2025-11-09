@@ -8,6 +8,7 @@ from django.contrib import messages
 from.models import Department,Course,Assignment,LearningMaterial,Submission
 from django.http import FileResponse
 from django.conf import settings
+from django.core.paginator import Paginator
 import os
 
 User = get_user_model()
@@ -475,6 +476,9 @@ def teacher_learning_materials_create(request):
 
 
 #-------------STUDENT FUNCTIONALITY ---------------- 
+
+
+
 from django.utils import timezone
 
 @login_required
@@ -667,14 +671,23 @@ def student_submissions_list(request):
     )
 
     if course_id:
+        assignments = assignments.filter(
+            course__id = course_id
+        )
         submissions = submissions.filter(
             assignment__course__id = course_id
         )
+        
         
     if assignment_id:
         submissions = submissions.filter(
             assignment__id = assignment_id
         )
+        
+    p = Paginator(submissions,3)
+    page = request.GET.get("page")
+    page_obj = p.get_page(page)
+    
 
     # submissions1 = Submission.objects.filter(student = request.user)
     # ---- submissions1 equal with above most of the time buh False
@@ -687,7 +700,7 @@ def student_submissions_list(request):
     
     # print(courses_with_assignments_where_enrolled)
     context = {
-        "submissions":submissions,
+        "submissions":page_obj,
         "courses":courses_with_assignments_where_enrolled,
         "assignments":assignments
     }

@@ -21,7 +21,7 @@
       <select id="assignment" name="assignment">
         <option value="">All</option>
         {% for assignment in assignments %}
-        <option value="{{assignment.id}}" >{{assignment.title}}</option>
+        <option value="{{assignment.id}}" {% if request.GET.assignment == assignment.id|stringformat:"s" %}  selected {% endif %} >{{assignment.title}}</option>
         {% endfor %}
       </select>
       <button type="submit">Filter</button>
@@ -36,9 +36,42 @@
       <p><strong>Submitted On:</strong> {{submission.submitted_on}}</p>
       <a href="#">Download Submission</a>
     </div>
+      {% empty %}
+      <ul>
+        <li>
+          No submission available for course and/or assignment
+        </li>
+      </ul>
     {% endfor %}
   </div>
-  <div class="no-results" style="display: none;">
+  {% if submissions.has_previous %}
+      <a href="?page=1&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">First</a>
+      <!-- <a href="?page=1&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">1</a> -->
+  {% endif %}
+  {% for val in submissions.paginator.page_range %}
+      {% if val == submissions.number %}
+            {% if val|add:-2 > 0 %}
+              <a href="?page={{val|add:-2}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:-2}}</a>
+              <a href="?page={{val|add:-1}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:-1}}</a>
+            {% elif val|add:-1 > 0 %}
+              <a href="?page={{val|add:-1}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:-1}}</a>
+            {% endif %}
+
+            <a style="text-decoration-color: yellow;" href="?page={{val}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val}}</a>
+
+            {% if val|add:2 < submissions.paginator.num_pages %}
+              <a href="?page={{val|add:1}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:1}}</a>
+              <a href="?page={{val|add:2}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:2}}</a>
+            {% elif val|add:1 < submissions.paginator.num_pages %}
+              <a href="?page={{val|add:1}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:1}}</a>
+            {% endif %}               
+      {% endif %}
+  {% endfor %} 
+  {% if submissions.has_next %}
+      <a href="?page={{submissions.paginator.num_pages}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">Last</a>
+  {% endif %}
+
+  <!-- <div class="no-results" style="display: none;">
     <p>No submissions found for the selected filters.</p>
-  </div>
+  </div> -->
 {% endblock body %}
