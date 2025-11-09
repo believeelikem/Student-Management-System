@@ -49,22 +49,12 @@
       <!-- <a href="?page=1&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">1</a> -->
   {% endif %}
   {% for val in submissions.paginator.page_range %}
-      {% if val == submissions.number %}
-            {% if val|add:-2 > 0 %}
-              <a href="?page={{val|add:-2}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:-2}}</a>
-              <a href="?page={{val|add:-1}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:-1}}</a>
-            {% elif val|add:-1 > 0 %}
-              <a href="?page={{val|add:-1}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:-1}}</a>
-            {% endif %}
-
-            <a style="text-decoration-color: yellow;" href="?page={{val}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val}}</a>
-
-            {% if val|add:2 < submissions.paginator.num_pages %}
-              <a href="?page={{val|add:1}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:1}}</a>
-              <a href="?page={{val|add:2}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:2}}</a>
-            {% elif val|add:1 < submissions.paginator.num_pages %}
-              <a href="?page={{val|add:1}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val|add:1}}</a>
-            {% endif %}               
+      {% if val > submissions.number|add:-3 and val < submissions.number|add:3 %}
+        {% if val == submissions.number %}
+        <a  style="color: red;" href="?page={{val}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val}}</a>
+        {% else %}
+        <a href="?page={{val}}&assignment={{ request.GET.assignment }}&course={{ request.GET.course }}">{{val}}</a>
+        {% endif %}
       {% endif %}
   {% endfor %} 
   {% if submissions.has_next %}

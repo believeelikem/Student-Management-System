@@ -684,7 +684,7 @@ def student_submissions_list(request):
             assignment__id = assignment_id
         )
         
-    p = Paginator(submissions,3)
+    p = Paginator(submissions,1)
     page = request.GET.get("page")
     page_obj = p.get_page(page)
     
