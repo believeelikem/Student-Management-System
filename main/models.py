@@ -15,11 +15,9 @@ def sluggy(clas,obj,field="name"):
         
         while clas.objects.filter(slug = temp).exists():
             temp = f"{base_slug}-{counter}"
-            counter += 1
-            
+            counter += 1 
         else:
             obj.slug = temp
-    
     
 
 class Department(models.Model):
@@ -31,6 +29,7 @@ class Department(models.Model):
         related_name="departments_created"
         )
     updated_at = models.DateTimeField(auto_now=True)
+    
     
 
  

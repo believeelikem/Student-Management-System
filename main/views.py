@@ -678,13 +678,12 @@ def student_submissions_list(request):
             assignment__course__id = course_id
         )
         
-        
     if assignment_id:
         submissions = submissions.filter(
             assignment__id = assignment_id
         )
         
-    p = Paginator(submissions,1)
+    p = Paginator(submissions,2)
     page = request.GET.get("page")
     page_obj = p.get_page(page)
     
