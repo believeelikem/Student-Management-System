@@ -15,7 +15,8 @@ class CustomUser(AbstractUser):
         "teacher":"Teacher",
         "student":"Student",      
     }
-     
+    
+    image = models.ImageField(upload_to="profiles/",blank=True,null=False,default="defualt_image.jpg")
     school_id = models.CharField(blank=True,null=True,unique=True,validators=[is_umat_id])
     role = models.CharField(choices=ROLES, blank=True,default="teacher")
     department = models.ForeignKey(

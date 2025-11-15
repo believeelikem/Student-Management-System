@@ -27,6 +27,7 @@ urlpatterns = [
     path("teacher/delete-assignment/<slug:slug>",views.teacher_assignment_delete,name = "teacher_assignment_delete"),
     path("teacher/create-assignment/",views.teacher_assignment_create,name = "teacher_assignment_create"),
     path("teacher/submissions/",views.teacher_submissions,name = "teacher_submissions_list"),
+    path("teacher/submissions/download/<int:id>",views.teacher_download_submission,name = "teacher_download_submission"),
     path("teacher/submissions/download-all",views.teacher_submissions_download_all,name = "teacher_submissions_download_all"),
     path("teacher/learning-materials/",views.teacher_learning_materials_list,name = "teacher_learning_materials_list"),
     path("teacher/create-learning-materials/",views.teacher_learning_materials_create,name = "teacher_learning_materials_create"), 

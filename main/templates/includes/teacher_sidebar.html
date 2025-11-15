@@ -7,8 +7,9 @@
       <li><a href="{% url 'main:teacher_assignment_list' %}">Assignments</a></li>
       <li><a href="{% url 'main:teacher_learning_materials_list' %}">Learning Materials</a></li>
       <li><a href="{% url 'main:teacher_submissions_list' %}">Submissions</a></li>
-      <li><a href="#">Student Progress</a></li>
+      <!-- <li><a href="#">Student Progress</a></li> -->
       <li><a href="#">Profile</a></li>
+      
     </ul>
-    <a href="#" class="logout-btn">Logout</a>
+    <a href="{% url 'users:logout' %}" class="logout-btn">Logout</a>
   </aside>

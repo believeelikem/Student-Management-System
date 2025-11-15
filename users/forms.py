@@ -16,7 +16,7 @@ class CustomUserCreationForm(AdminUserCreationForm):
                 'id': 'full_name"',
                 'placeholder': 'Enter full name here please '
             }),
-            'ID': forms.TextInput(attrs={
+            'school_id': forms.TextInput(attrs={
                 'id': 'school_id',
                 'placeholder': 'Enter full your id here '
             }),

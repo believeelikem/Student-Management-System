@@ -56,3 +56,6 @@ def logout_view(request):
     print("called")
     logout(request)
     return redirect("users:home")
+
+def profile(request):
+    return render(request,"users/profile.html")

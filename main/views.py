@@ -422,6 +422,13 @@ def teacher_submissions(request):
     print(f"explanation{all_submissions.explain()}")
     return render(request,"main/teacher_submissions_list.html",{"submissions":all_submissions})
 
+def teacher_download_submission(request,id):
+    submission = Submission.objects.get(id = id )
+    file_path = os.path.join(settings.MEDIA_ROOT,submission.submitted_document.name)
+    file_obj = open(file_path, "rb")
+    return FileResponse(file_obj, as_attachment=True)
+    
+
 def teacher_submissions_download_all(request):
     import zipfile
     from io import BytesIO
