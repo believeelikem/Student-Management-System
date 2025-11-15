@@ -1,6 +1,7 @@
   <!-- Sidebar -->
   <aside class="sidebar">
-    <h2>Teacher Panel</h2>
+
+    <h2>{{user.role}} Panel</h2>
     <ul>
       <li><a href="{% url 'main:teacher_dashboard' %}" class="active">Dashboard</a></li>
       <li><a href="{% url 'main:teacher_course_list' %}">My Courses</a></li>
@@ -8,7 +9,7 @@
       <li><a href="{% url 'main:teacher_learning_materials_list' %}">Learning Materials</a></li>
       <li><a href="{% url 'main:teacher_submissions_list' %}">Submissions</a></li>
       <!-- <li><a href="#">Student Progress</a></li> -->
-      <li><a href="#">Profile</a></li>
+      <li><a href="{% url 'users:profile' %}">Profile</a></li>
       
     </ul>
     <a href="{% url 'users:logout' %}" class="logout-btn">Logout</a>

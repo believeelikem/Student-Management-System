@@ -59,3 +59,5 @@ def logout_view(request):
 
 def profile(request):
     return render(request,"users/profile.html")
+def profile_update(request,username):
+    return render(request,"users/profile_update.html")

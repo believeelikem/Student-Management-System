@@ -7,7 +7,7 @@
       <li><a href="{% url 'main:student_submissions_list' %} ">Submissions</a></li>
       <li><a href="{% url  'main:student_learning_materials' %}">Learning Materials</a></li>
       <li><a href="#">Notifications</a></li>
-      <li><a href="#">Profile</a></li>
+      <li><a href="{% url 'users:profile' %}">Profile</a></li>
     </ul>
     <a href="{% url 'users:logout' %}" class="logout-btn">Logout</a>
   </aside>

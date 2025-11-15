@@ -10,5 +10,5 @@ urlpatterns = [
     path("login/",views.login_view,name="login"),
     path("logout/",views.logout_view,name="logout"),
     path("profile/",views.profile,name="profile"),
-    # path("profile/update/<str:username>",views.profile_update,name="profile_update"),
+    path("profile/update/<str:username>",views.profile_update,name="profile_update"),
 ]
