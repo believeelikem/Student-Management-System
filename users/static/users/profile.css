@@ -40,6 +40,15 @@ h1 {
     vertical-align: top;
     width: 55%;
 }
+.nonfield-errors {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
 
 .details-section h2 {
     margin: 0 0 10px 0;

@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .forms import CustomUserCreationForm,LoginForm
+from .forms import CustomUserCreationForm,LoginForm,CustomUserChangeForm
 from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 def home(request):
@@ -58,6 +61,46 @@ def logout_view(request):
     return redirect("users:home")
 
 def profile(request):
-    return render(request,"users/profile.html")
-def profile_update(request,username):
-    return render(request,"users/profile_update.html")
+    return render(request,f"users/profile_{request.user.role}.html")
+
+def profile_update(request,username):    
+    from django.contrib.auth.hashers import check_password
+    form = CustomUserChangeForm(instance = User.objects.get(username = username)) 
+     
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST,request.FILES,instance = request.user)
+        
+        if form.is_valid():
+            can_save = True
+            password1 = form.cleaned_data.get("password1")  
+            password2 = form.cleaned_data.get("password2")
+            print(form.cleaned_data)
+            
+            if any([password1,password2]):
+                old_password = request.user.password
+                print(old_password)
+                
+                if all([password1,password2]):
+                    print("both enterd ")
+                    if check_password(password1,old_password):
+                        print("Got here ")
+                        request.user.set_password(password2)
+                        return redirect("users:profile")
+
+                    else:
+                        print("Get here ")
+                        form.add_error(None, "old passwords didnt match")
+                        can_save = False
+                else:
+                    can_save = False
+                    form.add_error(None,"You must enter both old and new passwords ")
+            if can_save:
+                form.save()
+                return redirect("users:profile")
+        else:
+            print(form.errors)        
+                
+    context = {
+        "form":form
+    }
+    return render(request,f"users/profile_update_{request.user.role}.html",context)

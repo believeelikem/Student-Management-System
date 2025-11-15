@@ -1,0 +1,43 @@
+{% extends 'student_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'users/profile_update.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <h1>Edit Your Profile</h1>
+  <p class="subtitle">Update your personal details and account information.</p>
+
+  <div class="form-container">
+
+    <!-- PROFILE IMAGE -->
+    <div class="profile-picture-box">
+      <img src="{{user.image.url}}" alt="Profile Picture">
+      <label>Change Profile Picture</label>
+      <input type="file" name="profile_image">
+    </div>
+
+    <!-- FORM FIELDS -->
+    <label>Full Name</label>
+    <input type="text" name="name" value="Jane Doe">
+
+    <label>Email Address</label>
+    <input type="email" name="email" value="jane@example.com">
+
+    <label>Username</label>
+    <input type="text" name="username" value="janedoe">
+
+    <label>Change Password</label>
+    <input type="password" placeholder="Enter new password (optional)">
+
+    <label>Confirm New Password</label>
+    <input type="password" placeholder="Re-enter new password">
+
+    <button type="submit">Save Changes</button>
+  </div>
+
+  <!-- DELETE ACCOUNT SECTION -->
+  <div class="danger-zone">
+    <h3>Danger Zone</h3>
+    <p>Deleting your account is permanent. All your submissions and enrollments will be removed.</p>
+    <button class="delete-btn">Deactivate Account</button>
+  </div>
+{% endblock body %}

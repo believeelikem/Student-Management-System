@@ -3,6 +3,7 @@ from .models import CustomUser
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.core.validators import MinLengthValidator
 
 User = get_user_model()
 
@@ -70,13 +71,29 @@ class LoginForm(forms.Form):
         
         
 class CustomUserChangeForm(UserChangeForm):
+    password1 = forms.CharField(
+        max_length=12,
+        widget=forms.PasswordInput(attrs={"placeholder":"Enter old password"}),
+        required=False,
+        validators=[MinLengthValidator(8, message="Password must be at least 8 characters long.")]
+    )
+    password2 = forms.CharField(
+        max_length=12,
+        widget=forms.PasswordInput(attrs={"placeholder":"Enter new password"}),
+        required=False,
+        validators=[MinLengthValidator(8, message="Password must be at least 8 characters long.")]
+    )
+    
     class Meta(UserChangeForm.Meta):
         model = CustomUser
-        fields = "__all__"
+        fields = ["username","email","image"]
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["username"].required = True
+        
         # exclude = ('usable_password',)
         
-        
-
                   
 # class CustomUserCreationForm(UserCreationForm):
 #     class Meta(UserCreationForm.Meta):

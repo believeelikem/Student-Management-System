@@ -1,0 +1,71 @@
+{% extends 'student_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'users/profile.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+
+  <h1>{{user.role|capfirst}} Profile</h1>
+  <p class="subtitle">View your account details and personal information.</p>
+
+  <div class="profile-box">
+
+    <!-- PROFILE IMAGE -->
+    <div class="image-section">
+      <img src="{{user.image.url}}" alt="Profile Photo">
+      <a class="edit-btn" href="{% url 'users:profile_update' user.username %}">Edit Profile</a>
+    </div>
+
+    <!-- PROFILE DETAILS -->
+    <div class="details-section">
+      <h2>{{user.role|capfirst}} {{user.username}}</h2>
+
+      <div class="detail-item">
+        <span class="detail-label">Email:</span>
+        <span class="detail-value">jane@example.com</span>
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Username:</span>
+        <span class="detail-value">janedoe</span>
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Student ID:</span>
+        <span class="detail-value">RGSC-2024-0291</span>
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Joined:</span>
+        <span class="detail-value">September 4, 2024</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ADDITIONAL SECTIONS -->
+  <div class="sections-container">
+
+    <div class="section-box">
+      <p class="section-title">Enrolled Courses</p>
+      <p class="section-text">
+        View all courses you are currently enrolled in from your dashboard or "My Courses" page.
+      </p>
+    </div>
+
+    <div class="section-box">
+      <p class="section-title">Assignments</p>
+      <p class="section-text">
+        Track your upcoming assignments from the assignments section. You can also view submission history.
+      </p>
+    </div>
+
+    <div class="section-box">
+      <p class="section-title">Learning Materials</p>
+      <p class="section-text">
+        Access downloadable course materials from your learning materials page.
+      </p>
+    </div>
+
+  </div>
+
+{% endblock %}

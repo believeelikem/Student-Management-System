@@ -1,0 +1,53 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'users/profile_update.css' %}">
+{% endblock extra_styles %}
+{% block body %}
+  <h1>Edit Your Profile</h1>
+  <p class="subtitle">Update your personal details and account information.</p>
+
+  <div class="form-container">
+
+    <!-- PROFILE IMAGE -->
+
+
+    <!-- FORM FIELDS -->
+     <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="nonfield-errors">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+        <div class="profile-picture-box">
+        <img src="{{user.image.url}}" alt="Profile Picture">
+        <label>Change Profile Picture</label>
+        {{form.image}}
+        </div>
+        
+        <label>Email Address</label>
+        {{form.email}}
+
+        <label>Username</label>
+        {{form.username}}
+
+        <label>Change Password</label>
+        {{form.password1}}
+        {{form.password1.errors}}
+
+        <label>Confirm New Password</label>
+        {{form.password2}}
+        {{form.password1.errors}}
+
+        <button type="submit">Save Changes</button>
+     </form>
+
+  </div>
+
+  <!-- DELETE ACCOUNT SECTION -->
+  <div class="danger-zone">
+    <h3>Danger Zone</h3>
+    <p>Deleting your account is permanent. All your submissions and enrollments will be removed.</p>
+    <button class="delete-btn">Deactivate Account</button>
+  </div>
+{% endblock body %}

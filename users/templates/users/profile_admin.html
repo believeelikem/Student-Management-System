@@ -1,23 +1,23 @@
-{% extends 'teacher_base.html' %}
+{% extends 'main_base.html' %}
 {% load static %}
 {% block extra_styles %}<link rel="stylesheet" href="{% static 'users/profile.css' %}">
 {% endblock extra_styles %}
 {% block body %}
 
-  <h1>My Profile</h1>
-  <p class="subtitle">View your account details and personal information.</p>
+  <!-- <h1>{{user.role|capfirst}} Profile</h1>
+  <p class="subtitle">View your account details and personal information.</p> -->
 
   <div class="profile-box">
 
     <!-- PROFILE IMAGE -->
     <div class="image-section">
-      <img src="https://via.placeholder.com/140" alt="Profile Photo">
+      <img src="{{user.image.url}}" alt="Profile Photo">
       <a class="edit-btn" href="{% url 'users:profile_update' user.username %}">Edit Profile</a>
     </div>
 
     <!-- PROFILE DETAILS -->
     <div class="details-section">
-      <h2>Student Jane Doe</h2>
+    <h2>{{user.role|capfirst}} {{user.username}}</h2>
 
       <div class="detail-item">
         <span class="detail-label">Email:</span>

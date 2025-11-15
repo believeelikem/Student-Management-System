@@ -1,4 +1,4 @@
-{% extends 'teacher_base.html' %}
+{% extends 'main_base.html' %}
 {% load static %}
 {% block extra_styles %}<link rel="stylesheet" href="{% static 'users/profile_update.css' %}">
 {% endblock extra_styles %}
@@ -10,26 +10,23 @@
 
     <!-- PROFILE IMAGE -->
     <div class="profile-picture-box">
-      <img src="https://via.placeholder.com/120" alt="Profile Picture">
+      <img src="{{user.image.url}}" alt="Profile Picture">
       <label>Change Profile Picture</label>
       <input type="file" name="profile_image">
     </div>
 
     <!-- FORM FIELDS -->
-    <label>Full Name</label>
-    <input type="text" name="name" value="Jane Doe">
-
     <label>Email Address</label>
-    <input type="email" name="email" value="jane@example.com">
+    {{form.email}}
 
     <label>Username</label>
-    <input type="text" name="username" value="janedoe">
+    {{form.username}}
 
     <label>Change Password</label>
-    <input type="password" placeholder="Enter new password (optional)">
+    {{form.password1}}
 
     <label>Confirm New Password</label>
-    <input type="password" placeholder="Re-enter new password">
+    {{form.password2}}
 
     <button type="submit">Save Changes</button>
   </div>
@@ -38,6 +35,6 @@
   <div class="danger-zone">
     <h3>Danger Zone</h3>
     <p>Deleting your account is permanent. All your submissions and enrollments will be removed.</p>
-    <button class="delete-btn">Delete Account</button>
+    <button class="delete-btn">Deactivate Account</button>
   </div>
 {% endblock body %}
