@@ -4,8 +4,8 @@
 {% endblock extra_styles %}
 {% block body %}
 
-  <!-- <h1>{{user.role|capfirst}} Profile</h1>
-  <p class="subtitle">View your account details and personal information.</p> -->
+  <!-- <h1>{{user.role|capfirst}} Profile</h1> -->
+  <!-- <p class="subtitle">View your account details and personal information.</p> -->
 
   <div class="profile-box">
 
@@ -17,26 +17,26 @@
 
     <!-- PROFILE DETAILS -->
     <div class="details-section">
-    <h2>{{user.role|capfirst}} {{user.username}}</h2>
+      <h2>{{user.role|capfirst}} {{user.username}}</h2>
 
       <div class="detail-item">
         <span class="detail-label">Email:</span>
-        <span class="detail-value">jane@example.com</span>
+        <span class="detail-value">{{user.email}}</span>
       </div>
 
       <div class="detail-item">
         <span class="detail-label">Username:</span>
-        <span class="detail-value">janedoe</span>
+        <span class="detail-value">{{user.username}}</span>
       </div>
 
       <div class="detail-item">
-        <span class="detail-label">Student ID:</span>
-        <span class="detail-value">RGSC-2024-0291</span>
+        <span class="detail-label"> {{user.role |capfirst}} ID:</span>
+        <span class="detail-value">{{user.school_id}}</span>
       </div>
 
       <div class="detail-item">
         <span class="detail-label">Joined:</span>
-        <span class="detail-value">September 4, 2024</span>
+        <span class="detail-value">{{user.date_joined}}</span>
       </div>
     </div>
 

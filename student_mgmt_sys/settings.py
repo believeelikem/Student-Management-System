@@ -136,3 +136,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "users:login"
 
+# Source - https://stackoverflow.com/a
+# Posted by Alasdair
+# Retrieved 2025-11-16, License - CC BY-SA 3.0
+
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
+
+

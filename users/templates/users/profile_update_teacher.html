@@ -47,7 +47,7 @@
   <!-- DELETE ACCOUNT SECTION -->
   <div class="danger-zone">
     <h3>Danger Zone</h3>
-    <p>Deleting your account is permanent. All your submissions and enrollments will be removed.</p>
-    <button class="delete-btn">Deactivate Account</button>
+    <p> Note: You cant reactivate unless you contact admin </p>
+    <a class="delete-btn" href="{% url 'users:deactivate-account' %}">Deactivate Account</a>
   </div>
 {% endblock body %}

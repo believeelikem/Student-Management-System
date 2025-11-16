@@ -3,6 +3,16 @@
 {% block extra_styles %} <link rel="stylesheet" href="{% static 'users/login.css' %}"> {% endblock extra_styles %}
 {% block content  %}
   <div class="form-container">
+    {% if messages %}
+      <ul class="errorlist">
+        {% for message in messages %}
+        <li>
+          {{message}}
+        </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
     <h2>Student Login</h2>
 
     <form id="login-form" method="POST" action="">
@@ -26,6 +36,4 @@
     <p class="alt">Don't have an account? <a href="{% url 'users:register' %}">Create one</a></p>
   </div>
 
-</body>
-</html>
 {% endblock content %}

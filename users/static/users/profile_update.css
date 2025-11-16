@@ -92,8 +92,13 @@ button:hover {
 }
 
 .delete-btn {
+    display: inline-block;
     background-color: #dc2626;
     margin-top: 10px;
+    padding: 7px 14px;
+    color: white;
+    border-radius: 7px;
+    text-decoration: none;
 }
 
 .delete-btn:hover {

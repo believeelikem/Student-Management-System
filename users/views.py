@@ -3,8 +3,11 @@ from django.http import HttpResponse
 from .forms import CustomUserCreationForm,LoginForm,CustomUserChangeForm
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required,user_passes_test
+from django.contrib import messages
 
 User = get_user_model()
+
 
 
 def home(request):
@@ -28,8 +31,8 @@ def register(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        role = request.user.role
-        return redirect(f"main:{role}_dashboard")
+        return redirect(f"main:{request.user.role}_dashboard")
+    
     form = LoginForm()
     
     if request.method == "POST":
@@ -42,16 +45,23 @@ def login_view(request):
             print("The username is")
                                 
             user = authenticate(request, school_id = school_id, password = password)
+            print("user is: ",user)
             
             if user is not None:
-                login(request,user)
-                if user.role == "student":
-                    return redirect("main:student_dashboard")
-                elif user.role == "admin":
-                    return redirect("main:admin_dashboard")
-                elif user.role == "teacher":
-                    return redirect("main:teacher_dashboard")                
-            
+                if user.is_active:
+                    login(request,user)
+                    if user.role == "student":
+                        return redirect("main:student_dashboard")
+                    elif user.role == "admin":
+                        return redirect("main:admin_dashboard")
+                    elif user.role == "teacher":
+                        return redirect("main:teacher_dashboard") 
+                else:
+                    print("In the else block here ")
+                    messages.info(request," The Your account has been deactivated,contact admin for reactivation ")               
+            else:
+                messages.error(request, "Invalid school ID or password")
+                print("Look up failed")
     return render(request,"users/login.html",{"form":form})
 
 
@@ -60,9 +70,14 @@ def logout_view(request):
     logout(request)
     return redirect("users:home")
 
+from .decorators import  user_is_active
+
+@login_required
+# @user_passes_test(user_is_active)
 def profile(request):
     return render(request,f"users/profile_{request.user.role}.html")
 
+@login_required
 def profile_update(request,username):    
     from django.contrib.auth.hashers import check_password
     form = CustomUserChangeForm(instance = User.objects.get(username = username)) 
@@ -85,6 +100,7 @@ def profile_update(request,username):
                     if check_password(password1,old_password):
                         print("Got here ")
                         request.user.set_password(password2)
+                        # request.user.save()
                         return redirect("users:profile")
 
                     else:
@@ -104,3 +120,10 @@ def profile_update(request,username):
         "form":form
     }
     return render(request,f"users/profile_update_{request.user.role}.html",context)
+
+
+def deactivate_account(request):
+    request.user.is_active = False
+    request.user.save()
+    logout(request)
+    return redirect("users:login")

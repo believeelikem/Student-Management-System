@@ -9,35 +9,45 @@
   <div class="form-container">
 
     <!-- PROFILE IMAGE -->
-    <div class="profile-picture-box">
-      <img src="{{user.image.url}}" alt="Profile Picture">
-      <label>Change Profile Picture</label>
-      <input type="file" name="profile_image">
-    </div>
+
 
     <!-- FORM FIELDS -->
-    <label>Full Name</label>
-    <input type="text" name="name" value="Jane Doe">
+     <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="nonfield-errors">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+        <div class="profile-picture-box">
+        <img src="{{user.image.url}}" alt="Profile Picture">
+        <label>Change Profile Picture</label>
+        {{form.image}}
+        </div>
+        
+        <label>Email Address</label>
+        {{form.email}}
 
-    <label>Email Address</label>
-    <input type="email" name="email" value="jane@example.com">
+        <label>Username</label>
+        {{form.username}}
 
-    <label>Username</label>
-    <input type="text" name="username" value="janedoe">
+        <label>Change Password</label>
+        {{form.password1}}
+        {{form.password1.errors}}
 
-    <label>Change Password</label>
-    <input type="password" placeholder="Enter new password (optional)">
+        <label>Confirm New Password</label>
+        {{form.password2}}
+        {{form.password1.errors}}
 
-    <label>Confirm New Password</label>
-    <input type="password" placeholder="Re-enter new password">
+        <button type="submit">Save Changes</button>
+     </form>
 
-    <button type="submit">Save Changes</button>
   </div>
 
   <!-- DELETE ACCOUNT SECTION -->
   <div class="danger-zone">
     <h3>Danger Zone</h3>
-    <p>Deleting your account is permanent. All your submissions and enrollments will be removed.</p>
-    <button class="delete-btn">Deactivate Account</button>
+    <p>Note: You cant reactivate unless you contact admin </p>
+    <a class="delete-btn" href="{% url 'users:deactivate-account' %}">Deactivate Account</a>
   </div>
 {% endblock body %}

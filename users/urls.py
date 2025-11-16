@@ -11,4 +11,5 @@ urlpatterns = [
     path("logout/",views.logout_view,name="logout"),
     path("profile/",views.profile,name="profile"),
     path("profile/update/<str:username>",views.profile_update,name="profile_update"),
+    path("deactivate-account/",views.deactivate_account,name="deactivate-account"),
 ]
