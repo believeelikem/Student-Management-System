@@ -290,6 +290,8 @@ def teacher_dashboard(request):
     }
     return render(request,"main/teacher_dashboard.html",context)
 
+@login_required
+@allowed_role("teacher")
 def teacher_course_list(request):
     courses = Course.objects.filter(teacher = request.user)
     
@@ -316,7 +318,8 @@ def teacher_course_detail(request,slug):
     }
     return render(request,"main/teacher_course_detail.html",context)
 
-
+@login_required
+@allowed_role("teacher")
 def teacher_assignment_list(request):
     # courses = Course.objects.filter(teacher= request.user)
         # new_courses = []
