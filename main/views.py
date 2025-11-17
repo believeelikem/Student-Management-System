@@ -498,6 +498,9 @@ def teacher_learning_materials_create(request):
 
 from django.utils import timezone
 
+
+@login_required
+@allowed_role("student")
 @login_required
 @allowed_role("student")
 def student_dashboard(request):
@@ -521,6 +524,9 @@ def student_dashboard(request):
     }
     return render(request,"main/student_dashboard.html",context)
 
+
+@login_required
+@allowed_role("student")
 def student_course_enroll(request):
     dept_courses = Course.objects.filter(department = request.user.department)
     
