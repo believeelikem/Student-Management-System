@@ -340,7 +340,8 @@ def teacher_assignment_list(request):
     }
     return render(request,"main/teacher_assignment_list.html",context)
 
-
+@login_required
+@allowed_role("teacher")
 def teacher_assignment_detail(request,slug):
     assignment = Assignment.objects.get(slug = slug)
     
@@ -354,6 +355,9 @@ def teacher_assignment_detail(request,slug):
     }
     return render(request,"main/teacher_assignment_details.html",context)
 
+
+@login_required
+@allowed_role("teacher")
 def teacher_assignment_submission_download(request,id):
     submission = Submission.objects.get(id=id)
     
@@ -361,6 +365,9 @@ def teacher_assignment_submission_download(request,id):
     file_obj = open(file_path,"rb")
     return FileResponse(file_obj,as_attachment=True)
 
+
+@login_required
+@allowed_role("teacher")
 def teacher_assignment_create(request):
     form = AssignmentForm()
     
