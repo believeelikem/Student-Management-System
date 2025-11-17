@@ -64,7 +64,7 @@ def login_view(request):
                 print("Look up failed")
     return render(request,"users/login.html",{"form":form})
 
-
+@login_required
 def logout_view(request):
     print("called")
     logout(request)
