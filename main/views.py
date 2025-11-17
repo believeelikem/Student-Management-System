@@ -61,6 +61,9 @@ def courses(request):
     }
     return render(request,"main/admin_course_list.html",context)
 
+
+@login_required
+@allowed_role("admin")
 def admin_student(request):
     students = User.objects.filter(role = "student")
     
