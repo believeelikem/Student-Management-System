@@ -29,6 +29,7 @@ def register(request):
     }
     return render(request,"users/register.html",context)
 
+
 def login_view(request):
     if request.user.is_authenticated:
         return redirect(f"main:{request.user.role}_dashboard")
@@ -121,7 +122,7 @@ def profile_update(request,username):
     }
     return render(request,f"users/profile_update_{request.user.role}.html",context)
 
-
+@login_required
 def deactivate_account(request):
     request.user.is_active = False
     request.user.save()
